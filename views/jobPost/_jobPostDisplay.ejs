@@ -1,0 +1,194 @@
+<div class="container bg-white p-3" style="overflow-x: auto;">
+  <% if (jobPost.length > 0) { %>
+  <table class="table" id="jobPostTable">
+    <thead>
+      <tr>
+        <th scope="col">DATE</th>
+        <th scope="col">BUYER</th>
+        <th scope="col">CATEGORY</th>
+        <th scope="col">SUBCATEGORY</th>
+        <th scope="col">REQUEST</th>
+        <th scope="col">DURATION</th>
+        <th scope="col">BUDGET($)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% jobPost.forEach(sJobPost=> { %>
+      <tr>
+        <th scope="row">
+          <%=momentFormatMonthDayYear(sJobPost.createdAt)%>
+        </th>
+        <td>
+          <% if(sJobPost.userId.profileImage) {%><img class="rounded-circle" height="40" width="40"
+            src="/public/uploads/<%=sJobPost.userId.profileImage%>" />
+          <%} else {%><img class="rounded-circle" height="40" width="40"
+            src="/public/image/default-profile-photo.png" />
+          <%}%>
+          </td>
+          <td><%= sJobPost.category%></td>
+          <td><%= sJobPost.subCategory%></td>
+          <td>
+            <span id="postServiceDescription">
+              <%= sJobPost.postServiceDetailsDescription%>
+          </span>
+          <p id="postServiceAttachFiles" class="mt-3 mb-0 text-nowrap">
+            <% for(let file=0; file<sJobPost.attachFiles.length;file++) { %>
+            <a href="<%=`/user/${sJobPost.userId.username}/allMyJobPost/download?filename=${sJobPost.attachFiles[file].filename}&filemimetype=${sJobPost.attachFiles[file].mimetype}`%>"
+              class="btn btn-sm my-1" style="background-color: rgb(219, 212, 212);">
+              <%= sJobPost.attachFiles[file].originalname %>
+            </a>
+            <% } %>
+          </p>
+        </td>
+        <td>
+          <%=sJobPost.deliveryDay%>
+          <% if (isLogin && sUser.username !== sJobPost.userId.username) { %>
+          <% sJobPost.sentRequest.forEach(sRequest=> { %>
+          <% if (sRequest.requestSender.username === sUser.username && sJobPost.jobPostActivityControl === 'active') { %>
+          <form action="/user/<%= sUser.username %>/<%= sJobPost.id %>/<%= sRequest._id %>/post_request/remove"
+            method="GET">
+            <p class="mt-3"><button class="btn btn-sm btn-danger">Remove Request <i class="fas fa-trash"></i></button></p>
+          </form>
+          <% } %>
+          <% }) %>
+          <% } %>
+          <% if (isLogin && sUser.username===sJobPost.userId.username && sJobPost.jobPostActivityControl === 'active') { %>
+  <div><a href="/user/<%= sUser.username %>/post_request/<%= sJobPost._id %>/delete" class="btn btn-sm btn-danger mt-3">Delete <i class="fas fa-trash"></i></a></div>
+<% } %>
+        </td>
+        <td>
+          <%=sJobPost.price%>
+          <% if (isLogin && sUser.username===sJobPost.userId.username && sJobPost.sentRequest.length > 0 && sJobPost.jobPostActivityControl === 'active') { %>
+
+         <div><button class="btn btn-sm btn-clr mt-3" data-toggle="modal" data-target="#checkOfferRequestModal" onclick="checkOfferControl('<%= sUser.username %>', '<%= sJobPost.id %>')">Check
+            Offer</button></div>
+
+          <div class="modal fade" id="checkOfferRequestModal" tabindex="-1"
+            aria-labelledby="checkOfferRequestModalLabel" aria-hidden="true" style="z-index: 8000;">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="checkOfferRequestModalLabel">All Offers</h5>
+                  <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <table class="table" id="checkOfferRequestModalTable">
+                    <thead>
+                      <tr>
+                        <th scope="col">SENDER</th>
+                        <th scope="col">DESCRIPTION</th>
+                        <th scope="col">DURATION</th>
+                        <th scope="col">PRICE($)</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      
+                  </tbody>
+                </table>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+</div>
+</div>
+            </div>
+          </div>
+
+
+<% } %>
+<% if (isLogin && sUser.username===sJobPost.userId.username && sJobPost.jobPostActivityControl === 'active' && sJobPost.sentRequest.length === 0) { %>
+  <div><a href="/user/<%= sUser.username %>/post_request/<%= sJobPost._id %>/edit" target="_blank" class="btn btn-sm btn-clr mt-3">Edit <i class="fas fa-pencil-alt"></i></a></div>
+<% } %>
+<% if (isLogin && sUser.username !== sJobPost.userId.username  && sJobPost.jobPostActivityControl === 'active') { %>
+<% ok=false %>
+<% sJobPost.sentRequest.forEach(sRequest=> { %>
+<% if (sRequest.requestSender.username === sUser.username) { %>
+<p class="mt-3 btn btn-sm btn-success">Successfully Sent Request</p>
+<% ok=true %>
+<% } %>
+<% }) %>
+
+<% if (!ok && sJobPost.jobPostActivityControl === 'active') { %>
+<button class="btn btn-sm btn-clr mt-3" data-toggle="modal" data-target="#sendRequestModal" onclick="passJobPostId_SendRequest('<%= sUser.username %>', '<%= sJobPost.id %>')">Send
+  Request</button>
+
+<div class="modal fade" id="sendRequestModal" tabindex="-1" role="dialog"
+  aria-labelledby="sendRequestModalScrollableTitle" aria-hidden="true" style="z-index: 8000;">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="sendRequestModalScrollableTitle"><b>Send Offer
+            Request</b></h5>
+        <button type="button" class="close btn" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"><i class="fas fa-times"></i></span>
+        </button>
+      </div>
+      <form action="" method="POST" id="jobPostRequestForm">
+        <div class="modal-body">
+          <div class="form-group mb-2">
+            <p class="my-1"><b>Service Offer Description</b></p>
+            <textarea maxlength="150" class="form-control" id="offerDescription" name="offerDescription" rows="2"
+              placeholder="Describe what you want to offer..."
+              onkeyup="textAreaWordCounter(this, 'offerDescriptionTextAreaWordCounter');" required><%=  %></textarea>
+            <div class="text-end mt-1">
+              <span id="offerDescriptionTextAreaWordCounter">
+                <%= '' ? '' : 0 %>
+              </span>
+              <span> / 150</span>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <p class="my-0">
+              <b>Offer Delivery Days</b>
+            </p>
+            <input type="number" class="form-control" placeholder="Offer Delivery Days..." name="offerDeliveryDay"
+              required />
+          </div>
+
+          <div class="mb-2">
+            <p class="my-0"><b>Offer Price($)</b></p>
+            <input type="number" class="form-control" placeholder="Offer Price($)..." name="offerPrice" required />
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-clr">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<% } %>
+
+<% } %>
+<% if (sJobPost.jobPostActivityControl === 'order in progress') { %>
+ <p class="mt-3 btn btn-secondary">Order in progress</p>
+<div class="text-center">
+  <div class="spinner-grow text-primary bounce1 spinnerGrowAdminOrderInProgress" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-secondary bounce2 spinnerGrowAdminOrderInProgress" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+  <div class="spinner-grow text-success bounce3 spinnerGrowAdminOrderInProgress" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<% } %>
+<% if (sJobPost.jobPostActivityControl === 'inactive') { %>
+ <p class="mt-3 btn btn-sm btn-success">Order Completed <i class="far fa-check-circle"></i></p>
+<% } %>
+</td>
+</tr>
+<% }) %>
+</tbody>
+</table>
+<% } else { %>
+  <p class="text-center fs-3 text-muted"><strong>No Posts Available</strong></p>
+<% } %>
+</div>

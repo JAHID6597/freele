@@ -1,0 +1,115 @@
+<!-- Start Header -->
+<%- include('./includes/_header') %>
+<!-- End Header -->
+
+<!-- Start Main Nav Bar -->
+<%- include('./includes/_mainNavBar') %>
+<!-- End Main Nav Bar -->
+
+<div id="order-div">
+  <div id="order-create" class="container bg-white pb-3">
+    <%- include('./manageOrders/_order') %>
+    <div class="text-center py-5">
+      <% if(order.deliveryWork.length === 0 && !order.status) { %>
+      <h3 class="text-uppercase py-2">
+        <b>Order In Progress</b>
+      </h3>
+      <div class="spinner-grow text-primary bounce1" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-secondary bounce2" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success bounce3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <% } else { %>
+      <h2 class="text-uppercase mb-5">
+        <b>Order Received</b>
+      </h2>
+      <%- include('./manageOrders/_productTable') %> <% } %> <%
+      if(!order.status) { %>
+      <form
+        action="/user/<%= sUser.username%>/order/<%= order._id %>/completeorder?_method=PUT"
+        method="post"
+      >
+        <div class="mt-5">
+          <button class="btn btn-clr btn-lg">Complete Order</button>
+        </div>
+      </form>
+      <% } else { %>
+      <h2 class="text-uppercase mt-5 mb-3 pt-5">
+        <b>Order Completed</b>
+      </h2>
+      <div class="success-checkmark">
+        <div class="check-icon">
+          <span class="icon-line line-tip"></span>
+          <span class="icon-line line-long"></span>
+          <div class="icon-circle"></div>
+          <div class="icon-fix"></div>
+        </div>
+      </div>
+      <div class="mb-3 text-center">
+        <h3>Successfully Delivered Payment</h3>
+        <h3>
+          Delivered $<%= order.service.pricing.price[order.index].toFixed(2) %>
+        </h3>
+      </div>
+
+      <div id="feedBackService" class="my-5 pt-5">
+        <div class="col-md-6 offset-md-3 my-5">
+          <form
+            action="/user/<%= sUser.username%>/order/<%= order.id%>/feedback"
+            method="POST"
+            id="feedBackServiceForm"
+            class="p-5 mt-5"
+          >
+            <h2 class="text-uppercase mb-5">
+              <b>FeedBack</b>
+            </h2>
+            <div class="rating mb-4">
+              <input
+                type="number"
+                name="rating"
+                id="feedBackRatting"
+                class="star-rating-result form-control d-none"
+                value=""
+                required
+              />
+              <i class="feedback_star_rating far fa-star fa-2x"></i>
+              <i class="feedback_star_rating far fa-star fa-2x"></i>
+              <i class="feedback_star_rating far fa-star fa-2x"></i>
+              <i class="feedback_star_rating far fa-star fa-2x"></i>
+              <i class="feedback_star_rating far fa-star fa-2x"></i>
+            </div>
+            <div class="form-floating mb-3">
+              <textarea
+                class="form-control"
+                maxlength="100"
+                name="feedbacktext"
+                placeholder="Leave Your Feedback..."
+                id="feedbackTextArea"
+                style="height: 100px"
+                onkeyup="textAreaWordCounter(this, 'feedbackTitleTextAreaWordCounter');"
+                required
+              ></textarea>
+              <label for="feedbackTextArea">Leave Your Feedback...</label>
+            </div>
+            <div class="text-end mt-1">
+              <span id="feedbackTitleTextAreaWordCounter">0</span>
+              <span> / 100</span>
+            </div>
+            <div class="my-3 text-end">
+              <button type="submit" class="btn btn-clr px-5">Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<!-- Start Footer -->
+<%- include('./includes/_footer') %>
+<!-- End Footer -->

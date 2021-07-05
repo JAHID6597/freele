@@ -1,0 +1,80 @@
+<div id="signIn" class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <form action="/signin" method="post" class="card card-body">
+        <h1 class="text-center sign-title mt-3 mb-3">Signin</h1>
+
+          <% if (typeof errors !== 'undefined' && errors.errors) { %>
+            <% for( let index = 0; index < errors.errors.length; index++ ) { %>
+                  <% if (errors.errors[index].param === 'invalidSignIn') { %>
+                    <div class="mb-3 alert alert-danger" role="alert">
+                      <%= errors.errors[index].msg  %>
+                    </div>
+                  <% break } %>
+            <% } %>
+          <% } %>  
+
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputUserName"
+            name="username"
+            value="<%= user.username %>"
+            autocomplete="off"
+            placeholder="username"
+          />
+          <label for="floatingInputUserName">
+              <i class="fas fa-user"></i>
+              Username
+        </label>
+        </div>
+
+          <% if (typeof errors !== 'undefined' && errors.errors) { %>
+            <% for( let index = 0; index < errors.errors.length; index++ ) { %>
+                  <% if (errors.errors[index].param === 'username') { %>
+                    <span class="mb-3 alert-message">
+                      <%= errors.errors[index].msg  %>
+                    </span>
+                  <% break } %>
+            <% } %>
+          <% } %>  
+
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            name="password"
+            value="<%= user.password %>"
+            autocomplete="off"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">
+              <i class="fas fa-lock"></i>
+              Password
+            </label>
+        </div>
+
+          <% if (typeof errors !== 'undefined') { %>
+            <% for( let index = 0; index < errors.errors.length; index++ ) { %>
+                  <% if (errors.errors[index].param === 'password') { %>
+                    <span class="mb-3 alert-message">
+                      <%= errors.errors[index].msg  %>
+                    </span>
+                  <% break } %>
+            <% } %>
+          <% } %>          
+
+        <div>
+            <button type="submit" class="btn btn-lg sign-btn w-100">Signin</button>
+        </div>
+
+        <p class="mt-5 text-center">
+          Haven,t Account? <a href="/signup">Signup</a>
+        </p>
+      </form>
+    </div>
+    <div class="col-lg-6 d-none d-lg-block img-fluid" id="img-div-signin"></div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div id="postRequestForm">
+  <form
+    action="/user/<%=sUser.username%>/post_request"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    
+  <%- include('_jobPostFormItem') %> 
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-lg btn-clr">Submit Request</button>
+    </div>
+  </form>
+</div>

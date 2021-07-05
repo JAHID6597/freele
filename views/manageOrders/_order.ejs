@@ -1,0 +1,71 @@
+<div class="py-5 px-3">
+  <h3 class="text-break">
+    <b>Order <span class="text-muted">#<%= order.id %></span> </b>
+    <span class="float-end">$<%= (order.service.pricing.price[order.index] * 1).toFixed(2) %></span>
+  </h3>
+  <% if (order.user.username === sUser.username) { %>   
+    <h3 class="text-center mt-5 text-clr"><a class="text-decoration-none" href="<%=`${order.charge.receipt_url}`%>" target="_blank"><b>Click Me To Check Payment Receipt</b></a></h3>
+  <% } %>
+</div>
+<div class="container-fluid">
+  <table class="table">
+    <thead>
+      <tr class="btn-clr">
+        <th scope="col">Image</th>
+        <th scope="col">Title</th>
+        <th scope="col">Day</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="table-secondary">
+        <td>
+          <a
+            href="/user/<%= order.service.userId.username %>/service/<%= order.service.slug %>"
+            target="_blank"
+          >
+            <img
+              class="img-thumbnail"
+              src="/public/uploads/<%= order.service.thumbnailImage %>"
+              height="40"
+              width="40"
+          /></a>
+        </td>
+        <td>
+          <a
+            href="/user/<%= order.service.userId.username %>/service/<%= order.service.slug %>"
+            target="_blank"
+            ><%= order.service.serviceTitle.substr(0, 10) + '...' %></a
+          >
+        </td>
+        <td><%= order.service.pricing.deliveryDay[order.index] %></td>
+        <td><%= (order.service.pricing.price[order.index] * 1).toFixed(2) %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<% if (!order.status) { %>
+<div class="countdown d-flex justify-content-center flex-wrap my-5">
+  <span
+    id="pass-end-date"
+    class="d-none"
+    data-passenddate="<%=countDownTimer(order.createdAt, order.service.pricing.deliveryDay[order.index])%>"
+  ></span>
+  <div id="cnt-day" class="">
+    <p id="day" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">DAY</p>
+  </div>
+  <div id="cnt-hour" class="">
+    <p id="hour" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">HOUR</p>
+  </div>
+  <div id="cnt-minute" class="">
+    <p id="minute" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">MINUTE</p>
+  </div>
+  <div id="cnt-second" class="">
+    <p id="second" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">SECOND</p>
+  </div>
+</div>
+<% } %>

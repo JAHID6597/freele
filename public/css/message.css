@@ -1,0 +1,46 @@
+#messageMainDiv{
+    margin-top: 20vh;
+    margin-bottom: 20vh;
+}
+
+#messageUserListGroup li {
+  border: none;
+}
+
+#messageUserListGroup li:hover {
+  background-color: #f5f5f5;
+}
+
+.chatBoxControl {
+  width: 45%;
+}
+
+.chatBoxControl .messageTextContent {
+  background-color: #f5f5f5;
+  padding: 10px;
+}
+
+#allMessageDiv{
+    height: 600px;
+    overflow-y: auto;
+    scroll-behavior: auto;
+}
+
+#messageUserListGroup{
+    height: 660px;
+    overflow-y: auto;
+    scroll-behavior: auto;    
+}
+
+#messageSendBox{
+    height: 60px;
+}
+
+
+/* MEDIA QUERIES */
+@media all and (max-width: 991px) {
+  .chatBoxControl {
+    width: 80%;
+    margin: 10% 0;
+  }
+}

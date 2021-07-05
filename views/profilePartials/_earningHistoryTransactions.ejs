@@ -1,0 +1,135 @@
+<div id="earningHistoryTransactions" class="my-5">
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link active"
+          id="earningService-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#earningService"
+          type="button"
+          role="tab"
+          aria-controls="earningService"
+          aria-selected="true"
+        >
+          Service
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="earningJobPost-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#earningJobPost"
+          type="button"
+          role="tab"
+          aria-controls="earningJobPost"
+          aria-selected="false"
+        >
+          JobPost
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade show active my-3"
+        id="earningService"
+        role="tabpanel"
+        aria-labelledby="earningService-tab"
+      >
+        <table class="table table-striped" id="earningServiceTable">
+          <thead>
+            <tr class="btn-clr text-center">
+              <th scope="col">#</th>
+              <th scope="col">Client</th>
+              <th scope="col">Order</th>
+              <th scope="col">Service</th>
+              <th scope="col">Amount($)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let orderIndex = 0; orderIndex < order.length; orderIndex++ ) { %>
+            <tr class="text-center">
+              <th scope="row"><%= orderIndex+1 %></th>
+              <td>
+                <% if (order[orderIndex].user.profileImage) { %>
+                <img
+                  src="/public/uploads/<%= order[orderIndex].user.profileImage %>"
+                  width="32"
+                  height="32"
+                  class="rounded-circle me-2"
+                />
+                <% } else { %>
+                <img
+                  src="/public/image/default-profile-photo.png"
+                  width="32"
+                  height="32"
+                  class="rounded-circle me-2"
+                />
+                <% } %>
+                <span> <%= order[orderIndex].user.username %></span>
+              </td>
+              <td><%= order[orderIndex].id %></td>
+              <td><%= order[orderIndex].service._id%></td>
+              <td>
+                <%=
+                order[orderIndex].service.pricing.price[order[orderIndex].index]
+                %>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="tab-pane fade my-3"
+        id="earningJobPost"
+        role="tabpanel"
+        aria-labelledby="earningJobPost-tab"
+      >
+        <table class="table table-striped" id="earningJobPostTable">
+          <thead>
+            <tr class="btn-clr text-center">
+              <th scope="col">#</th>
+              <th scope="col">Client</th>
+              <th scope="col">Order</th>
+              <th scope="col">JobPost</th>
+              <th scope="col">Amount($)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let jobPostOrderIndex = 0; jobPostOrderIndex < jobPostOrder.length; jobPostOrderIndex++ ) { %>
+            <tr class="text-center">
+              <th scope="row"><%= jobPostOrderIndex+1 %></th>
+              <td>
+                <% if (jobPostOrder[jobPostOrderIndex].jobPost.userId.profileImage) { %>
+                <img
+                  src="/public/uploads/<%= jobPostOrder[jobPostOrderIndex].jobPost.userId.profileImage %>"
+                  width="32"
+                  height="32"
+                  class="rounded-circle me-2"
+                />
+                <% } else { %>
+                <img
+                  src="/public/image/default-profile-photo.png"
+                  width="32"
+                  height="32"
+                  class="rounded-circle me-2"
+                />
+                <% } %>
+                <span> <%= jobPostOrder[jobPostOrderIndex].jobPost.userId.username %></span>
+              </td>
+              <td><%= jobPostOrder[jobPostOrderIndex].id %></td>
+              <td><%= jobPostOrder[jobPostOrderIndex].jobPost._id%></td>
+              <td>
+                <%= jobPostOrder[jobPostOrderIndex].request.offerPrice%>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

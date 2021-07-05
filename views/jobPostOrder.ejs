@@ -1,0 +1,67 @@
+<!-- Start Header -->
+<%- include('./includes/_header') %>
+<!-- End Header -->
+
+<!-- Start Main Nav Bar -->
+<%- include('./includes/_mainNavBar') %>
+<!-- End Main Nav Bar -->
+
+<div id="order-div">
+  <div id="order-create" class="container bg-white pb-3">
+    <%- include('./jobPost/_jobPostOrder') %>
+    <div class="text-center py-5">
+      <% if(jobPostOrder.deliveryWork.length === 0 && !jobPostOrder.status) { %>
+      <h3 class="text-uppercase py-2">
+        <b>Order In Progress</b>
+      </h3>
+      <div class="spinner-grow text-primary bounce1" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-secondary bounce2" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success bounce3" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <% } else { %>
+      <h2 class="text-uppercase mb-5">
+        <b>Order Received</b>
+      </h2>
+      <%- include('./jobPost/_jobPostOrderProductTable') %>
+       <% } %> 
+      <% if(!jobPostOrder.status) { %>
+      <form
+        action="/user/<%= sUser.username%>/jobPostOrder/<%= jobPostOrder._id %>/completeorder?_method=PUT"
+        method="post"
+      >
+        <div class="mt-5">
+          <button class="btn btn-clr btn-lg">Complete Order</button>
+        </div>
+      </form>
+      <% } else { %>
+      <h2 class="text-uppercase mt-5 mb-3 pt-5">
+        <b>Order Completed</b>
+      </h2>
+      <div class="success-checkmark">
+        <div class="check-icon">
+          <span class="icon-line line-tip"></span>
+          <span class="icon-line line-long"></span>
+          <div class="icon-circle"></div>
+          <div class="icon-fix"></div>
+        </div>
+      </div>
+      <div class="my-3 text-center">
+        <h3>Successfully Delivered Payment</h3>
+        <h3>
+          Delivered $<%= request.offerPrice.toFixed(2) %>
+        </h3>
+      </div>
+
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<!-- Start Footer -->
+<%- include('./includes/_footer') %>
+<!-- End Footer -->

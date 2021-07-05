@@ -1,0 +1,820 @@
+/* import google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend&display=swap');
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css');
+@import url('https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css');
+
+/* import bootstrap css */
+@import '/bootstrap/css/bootstrap.min.css';
+
+/* import fontawesome css */
+@import '/fontawesome/css/all.min.css';
+
+/* import tagify css */
+@import 'https://cdnjs.cloudflare.com/ajax/libs/tagify/4.0.5/tagify.css';
+
+/* Start Common CSS */
+body {
+  background-color: #f5f5f5;
+}
+
+.btn-clr {
+  color: white;
+  background-color: #6c63ff;
+}
+
+.btn-clr:hover {
+  color: white;
+}
+
+.text-clr {
+  color: #6c63ff;
+}
+
+.clr-white{
+  color: white;
+}
+
+.clr-black{
+  color: black;
+}
+
+/* End Common CSS */
+
+/* Start Main Nav Bar */
+.navbar {
+  transition: all 0.4s;
+}
+
+.navbar-nav .nav-item .nav-link {
+  color: #fff;
+  font-size: 20px;
+}
+
+.navbar .navbar-brand {
+  color: #fff;
+  font-size: 30px;
+}
+
+.navbar-nav .nav-item .nav-link:hover,
+.navbar .navbar-brand:hover {
+  color: white;
+}
+
+.navbar.active {
+  background: #fff;
+  box-shadow: 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.active .nav-link,
+.navbar.active .navbar-brand {
+  color: black;
+}
+
+.navbar.active .nav-link:hover,
+.navbar.active .navbar-brand:hover {
+  color: black;
+}
+
+body.offcanvas-active {
+  overflow: hidden;
+}
+
+.offcanvas-header {
+  display: none;
+}
+
+.mobile-offcanvas ul li a,
+.logo-title {
+  font-family: 'Kiwi Maru', serif;
+}
+
+.screen-darken {
+  height: 100%;
+  width: 0%;
+  z-index: 30;
+  position: fixed;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgba(34, 34, 34, 0.6);
+  transition: opacity 0.2s linear, visibility 0.2s, width 2s ease-in;
+}
+
+.screen-darken.active {
+  z-index: 10;
+  transition: opacity 0.3s ease, width 0s;
+  opacity: 1;
+  width: 100%;
+  visibility: visible;
+}
+
+#main_nav_div {
+  position: relative;
+}
+
+#main_top_nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 5000;
+}
+
+.navbar .megamenu {
+  padding: 2rem;
+}
+
+.megamenuTextControl {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+/* End Main Nav Bar */
+
+/* Start Main Banner Slider */
+#mainBanner {
+  min-height: 80vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url('../image/1.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  top: 0;
+}
+
+#mainBanner-blackOverlay {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+}
+
+.bannerContent {
+  max-width: 750px;
+  width: 100%;
+  margin-top: 25vh;
+}
+
+.bannerTitle {
+  color: white;
+  text-transform: uppercase;
+}
+
+.input-group-lg > .form-control,
+.input-group
+  :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+  border-radius: 0;
+  margin: 0;
+}
+/* End Main Banner Slider */
+
+/* Start Client Logo */
+#client-logo {
+  min-height: 20vh;
+  background: rgb(240, 235, 235);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.client-logo-ul {
+  list-style-type: none;
+  height: 10vh;
+}
+
+.client-logo-ul li {
+  display: inline-block;
+  height: 10vh;
+  margin-top: 5vh;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.client-logo-ul li img {
+  width: 100px;
+  height: 10vh;
+}
+/* End Client Logo */
+
+/* Start Signin And Signup Form */
+.sign-title {
+  text-transform: uppercase;
+  font-family: Arial;
+}
+
+.sign-btn {
+  color: white;
+  background-color: #6c63ff;
+}
+
+.sign-btn:hover {
+  color: white;
+}
+
+#signIn,
+#signUp {
+  margin-top: 20vh;
+  margin-bottom: 10vh;
+}
+
+#img-div-signin {
+  background-image: url('../image/signin.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+#img-div-signup {
+  background-image: url('../image/signup.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.alert-message {
+  color: red;
+}
+/* End Signin And Signup Form */
+
+/* Start User Profile */
+#userProfile {
+  margin-top: 15vh;
+  margin-bottom: 5vh;
+}
+
+.profile-card {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.profileImg img {
+  max-width: 180px;
+  max-height: 180px;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #6c63ff;
+}
+
+.profile-pill-tab {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.pill-tab-content-title,
+.pill-tab-content-value {
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+.pill-tab-content-value {
+  color: #6c63ff;
+}
+
+/* Profile Service*/
+.serviceProfileLink {
+  text-decoration: none;
+  color: black;
+}
+
+.serviceProfileLink:hover {
+  color: black;
+}
+
+/* End User Profile */
+
+/* Start Edit Profile */
+#editProfile {
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+}
+
+#editProfileForm {
+  background-color: #fff;
+}
+
+#editProfileImage {
+  max-width: 180px;
+  max-height: 180px;
+}
+
+#setEditProfileImgLabel {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+#setEditProfileImgSpan {
+  opacity: 0;
+}
+
+#setEditProfileImgLabel:hover #editProfileImgBlackOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  width: 180px;
+  height: 180px;
+}
+
+#setEditProfileImgLabel:hover #setEditProfileImgSpan {
+  opacity: 1;
+  color: white;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* End Edit Profile */
+
+/* Start 404 */
+#error404 {
+  margin-top: 20vh;
+  margin-bottom: 10vh;
+  text-align: center;
+}
+
+#title404 {
+  font-weight: bold;
+  color: transparent;
+  font-size: 200px;
+  background: url('https://media.giphy.com/media/zW0n7AIWG4ka4/giphy.gif');
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+#subTitle404 {
+  font-size: 40px;
+}
+/* End 404 */
+
+/* Start Footer */
+footer {
+  width: 100%;
+  background-color: #fff;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.footer-item-title {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-item {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.footer-item li a {
+  text-decoration: none;
+}
+
+.footer-logo-item a {
+  color: black;
+  margin-right: 10px;
+}
+/* End Footer */
+
+/* Start All My Services */
+#allMyServices {
+  margin-top: 20vh;
+}
+
+#allOfMyServices{
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+}
+/* End All My Services */
+
+/* Start All Services */
+#allServices {
+  padding-top: 15vh;
+}
+/* End All Services */
+
+/* Start Upload Services */
+#createNewService,
+#editService {
+  margin-top: 20vh;
+  margin-bottom: 20vh;
+  padding: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.tagify {
+  white-space: normal;
+  overflow: hidden;
+}
+
+.title-border {
+  text-decoration: underline wavy;
+  text-decoration-color: #6c63ff;
+  font-family: 'Kiwi Maru', serif;
+}
+
+#post-thumbnail-label {
+  position: relative;
+}
+
+#post-thumbnail-label:hover #thumbnail-image-blackOverlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 600px;
+  width: 100%;
+}
+
+#thumbnail-image-span {
+  display: none;
+}
+
+#post-thumbnail-label:hover #thumbnail-image-span {
+  color: white;
+  display: block;
+  font-size: 5vh;
+}
+/* End Upload Services */
+
+/* Start Single Service */
+#displaySingleService {
+  margin-top: 20vh;
+}
+
+.pricingTitleList {
+  background-color: #f5f5f5;
+}
+/* End Single Services */
+
+/* Start Search */
+#search {
+  padding-top: 20vh;
+}
+/* End Search */
+
+/* Start Order */
+.big-text {
+  font-weight: bold;
+  font-size: 4rem;
+  line-height: 1;
+  margin: 0px 5px;
+}
+
+#order-div {
+  margin-top: 15vh;
+  margin-bottom: 15vh;
+}
+
+#order-create {
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+#dropFileForm {
+  margin: 16px;
+  text-align: center;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+#dropFileForm #fileLabel {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 16px;
+  position: relative;
+  cursor: pointer;
+}
+
+#dropFileForm #fileInput {
+  display: none;
+}
+
+#dropFileForm #fileLabel:after,
+#dropFileForm #fileLabel:before {
+  position: absolute;
+  content: '';
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: -2;
+  border-radius: 8px 8px 0 0;
+}
+
+#dropFileForm #fileLabel:before {
+  z-index: -1;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 5%,
+    black 5%,
+    black 10%
+  );
+  opacity: 0;
+  transition: 0.5s;
+}
+
+#dropFileForm.fileHover #fileLabel:before {
+  opacity: 0.25;
+}
+
+#dropFileForm .uploadButton {
+  border: 0;
+  outline: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.spinner-grow {
+  height: 1rem;
+  width: 1rem;
+}
+
+.bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+.success-checkmark {
+  width: 80px;
+  height: 115px;
+  margin: 0 auto;
+}
+.success-checkmark .check-icon {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  border-radius: 50%;
+  box-sizing: content-box;
+  border: 4px solid #6c63ff;
+}
+.success-checkmark .check-icon::before {
+  top: 3px;
+  left: -2px;
+  width: 30px;
+  transform-origin: 100% 50%;
+  border-radius: 100px 0 0 100px;
+}
+.success-checkmark .check-icon::after {
+  top: 0;
+  left: 30px;
+  width: 60px;
+  transform-origin: 0 50%;
+  border-radius: 0 100px 100px 0;
+}
+.success-checkmark .check-icon::before,
+.success-checkmark .check-icon::after {
+  content: '';
+  height: 100px;
+  position: absolute;
+  background: #fff;
+  transform: rotate(-45deg);
+}
+.success-checkmark .check-icon .icon-line {
+  height: 5px;
+  background-color: #6c63ff;
+  display: block;
+  border-radius: 2px;
+  position: absolute;
+  z-index: 10;
+}
+.success-checkmark .check-icon .icon-line.line-tip {
+  top: 46px;
+  left: 14px;
+  width: 25px;
+  transform: rotate(45deg);
+  animation: icon-line-tip 2s;
+}
+.success-checkmark .check-icon .icon-line.line-long {
+  top: 38px;
+  right: 8px;
+  width: 47px;
+  transform: rotate(-45deg);
+  animation: icon-line-long 2s;
+}
+.success-checkmark .check-icon .icon-circle {
+  top: -4px;
+  left: -4px;
+  z-index: 10;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  box-sizing: content-box;
+  border: 4px solid #6c63ff;
+}
+.success-checkmark .check-icon .icon-fix {
+  top: 8px;
+  width: 5px;
+  left: 26px;
+  z-index: 1;
+  height: 85px;
+  position: absolute;
+  transform: rotate(-45deg);
+  background-color: #ffffff;
+}
+
+@keyframes icon-line-tip {
+  0% {
+    width: 0;
+    left: 1px;
+    top: 19px;
+  }
+  54% {
+    width: 0;
+    left: 1px;
+    top: 19px;
+  }
+  70% {
+    width: 50px;
+    left: -8px;
+    top: 37px;
+  }
+  84% {
+    width: 17px;
+    left: 21px;
+    top: 48px;
+  }
+  100% {
+    width: 25px;
+    left: 14px;
+    top: 45px;
+  }
+}
+@keyframes icon-line-long {
+  0% {
+    width: 0;
+    right: 46px;
+    top: 54px;
+  }
+  65% {
+    width: 0;
+    right: 46px;
+    top: 54px;
+  }
+  84% {
+    width: 55px;
+    right: 0px;
+    top: 35px;
+  }
+  100% {
+    width: 47px;
+    right: 8px;
+    top: 38px;
+  }
+}
+
+#myOrder {
+  margin-top: 15vh;
+  margin-bottom: 15vh;
+}
+
+#feedBackServiceForm {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.feedback_star_rating {
+  cursor: pointer;
+  color: #ff9800;
+}
+
+/* End Order */
+
+/* Start Earning History */
+#earningHistoryDashbord {
+  margin-top: 20vh;
+}
+
+.bg-totalEarning {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.bg-totalEarningService {
+  background-color: rgb(28, 179, 28);
+  color: white;
+}
+
+.bg-totalEarningJobPost {
+  background-color: rgb(233, 50, 50);
+  color: white;
+}
+
+/* End Earning History */
+
+/* Start All User */
+#allUsers{
+  margin-top: 20vh;
+  margin-bottom: 10vh;
+}
+/* End All User */
+
+/* Start All My FeedBacks */
+#allMyFeedBacks{
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+}
+
+/* End All My FeedBacks */
+
+/* Start Media Query */
+@media all and (max-width: 991px) {
+  /* Main Nav */
+  #header-search {
+    display: none;
+  }
+  .navbar {
+    background: #fff;
+  }
+  .navbar .navbar-brand,
+  .navbar-nav .nav-item .nav-link {
+    color: black;
+  }
+  .navbar .navbar-brand:hover,
+  .navbar-nav .nav-item .nav-link:hover {
+    color: black;
+  }
+  .offcanvas-header {
+    display: block;
+  }
+  .mobile-offcanvas {
+    transform: translateX(-100%);
+    background-color: #fff;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 80%;
+    z-index: 1200;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transition: visibility 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  .mobile-offcanvas ul li a {
+    margin-left: 20px;
+    color: black;
+  }
+  .mobile-offcanvas.show {
+    visibility: visible;
+    transform: translateX(0);
+  }
+  .mobile-offcanvas .container,
+  .mobile-offcanvas .container-fluid {
+    display: block;
+  }
+  #title404 {
+    font-size: 80px;
+  }
+  #subTitle404 {
+    font-size: 20px;
+  }
+  .allUserProfileImage{
+    height: 100px;
+    width: 100px;
+  }
+  /* Main Banner Slider */
+}
+
+/* ============ start desktop view ============ */
+@media all and (min-width: 992px) {
+  .navbar .has-megamenu {
+    position: static !important;
+  }
+  .navbar .megamenu {
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 0;
+  }
+}
+/* ============ end desktop view ============ */
+
+/* ============ start mobile view ============ */
+@media (max-width: 991px) {
+  .navbar.fixed-top .navbar-collapse,
+  .navbar.sticky-top .navbar-collapse {
+    overflow-y: auto;
+    max-height: 90vh;
+    margin-top: 10px;
+  }
+}
+/* ============ end mobile view ============ */
+
+/* End Media Query */

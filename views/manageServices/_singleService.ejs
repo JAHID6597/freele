@@ -1,0 +1,249 @@
+<div id="displaySingleService" class="container">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="p-3 bg-white">
+        <% if (isLogin && sUser.username === service.userId.username) { %>
+        <div class="text-end">
+          <a
+            href="/user/<%= sUser.username %>/service/<%=service.slug%>/edit"
+            class="btn btn-clr"
+            >Edit <i class="fas fa-pencil-alt"></i
+          ></a>
+          <a
+            href="/user/<%= sUser.username %>/service/<%=service.slug%>/delete"
+            class="btn btn-danger"
+            >Delete <i class="fas fa-trash"></i
+          ></a>
+        </div>
+        <% } %>
+        <h1 class="my-3"><b><%= service.serviceTitle%></b></h1>
+        <p>
+          <a
+            href="/user/<%= service.userId.username%>"
+            class="serviceProfileLink"
+            target="_blank"
+          >
+            <% if (service.userId.profileImage) { %>
+            <img
+              class="rounded-circle"
+              height="40px"
+              src="/public/uploads/<%= service.userId.profileImage%>"
+            />
+            <% } else { %>
+            <img
+              class="rounded-circle"
+              height="40px"
+              src="/public/image/default-profile-photo.png"
+            />
+            <% } %>
+            <span class="ms-2"><%= service.userId.username%></span></a
+          >
+        </p>
+        <p class="mb-1">
+          <strong
+            ><%= service.order.length <= 1 ? `${service.order.length} Order` :
+            `${service.order.length} Orders` %>
+          </strong>
+        </p>
+        <p class="text-muted">
+          <b><%= momentTimeFromNow(service.createdAt) %></b>
+        </p>
+        <div class="singleServiceCategory">
+          <p>
+            <a href="/search?searchItem=<%= service.category %>" target="_blank"
+              ><%= service.category %></a
+            >
+            <span> > </span>
+            <a
+              href="/search?searchItem=<%= service.subCategory %>"
+              target="_blank"
+              ><%= service.subCategory %></a
+            >
+          </p>
+          <p></p>
+        </div>
+        <img
+          src="/public/uploads/<%= service.thumbnailImage%>"
+          style="width: 100%; max-height: 400px"
+          class="mb-3 mt-3"
+        />
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="my-lg-0 my-3 bg-white p-3">
+        <ul
+          class="nav nav-pills nav-justified mb-3 pricingTitleList"
+          id="pills-tab"
+          role="tablist"
+        >
+          <% for( let index = 0; index < service.pricing.price.length; index++
+          ){ %> <% if(index === 0) {priceTitle = 'Basic'} else if(index ===
+          1){priceTitle = 'Standard'} else{ priceTitle = 'Premium'}%> <%
+          if(!service.pricing.price[index]) continue %>
+
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link <%= (index === 0) ? ' active' : ''%>"
+              id="pills-<%=priceTitle%>-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-<%=priceTitle%>"
+              type="button"
+              role="tab"
+              aria-controls="pills-<%=priceTitle%>"
+              aria-selected="true"
+            >
+              <%= priceTitle%>
+            </button>
+          </li>
+          <% } %>
+        </ul>
+
+        <div class="tab-content" id="pills-tabContent">
+          <% for( let index = 0; index < service.pricing.price.length; index++ )
+          { %> <% if(index === 0) {priceTitle = 'Basic'} else if(index ===
+          1){priceTitle = 'Standard'} else{ priceTitle = 'Premium'}%> <%
+          if(!service.pricing.price[index]) continue %>
+
+          <div
+            class="tab-pane fade show <%= (index === 0) ? ' active' : ''%>"
+            id="pills-<%=priceTitle%>"
+            role="tabpanel"
+            aria-labelledby="pills-<%=priceTitle%>-tab"
+          >
+            <span><b><%= service.pricing.packageName[index] %></b></span>
+            <b
+              ><span class="float-end"
+                >$<%= (service.pricing.price[index] * 1).toFixed(2) %></span
+              ></b
+            >
+            <p class="my-4">
+              <i class="fas fa-clock"></i> <%=
+              service.pricing.deliveryDay[index] %> Days Delivery
+            </p>
+            <p class="my-4"><%= service.pricing.description[index] %></p>
+
+            <a
+              href="/user/<%=service.userId.username%>/service/<%=service.slug%>/checkout?index=<%=index%>"
+              class="btn btn-clr w-100"
+              >Continue ($<%= (service.pricing.price[index] *
+              1).toFixed(2)%>)</a
+            >
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8 mb-5">
+      <div class="p-3 bg-white">
+        <div class="my-2">
+          <h2 class="py-3"><b>Service Description</b></h2>
+          <%- service.sanitizeServiceDescription %>
+        </div>
+
+        <div class="my-5">
+          <h4 class="py-2"><b>Related Tags <i class="fas fa-tags"></i></b></h4>
+          <% for (let index = 0; index < JSON.parse(service.serviceTags).length;
+          index++) { %>
+          <a
+            href="/search?searchItem=<%= JSON.parse(service.serviceTags)[index].value %>"
+            class="btn m-1"
+            style="background-color: rgb(235, 224, 224)"
+            ><%= JSON.parse(service.serviceTags)[index].value %>
+          </a>
+          <% } %>
+        </div>
+
+        <div class="my-5">
+          <h4 class="py-2"><b>About the Seller</b></h4>
+          <div class="d-flex align-items-center">
+            <div class="flex-shrink-0">
+              <a href="/user/<%= service.userId.username%>" target="_blank">
+                <% if (service.userId.profileImage) { %>
+                <img
+                  class="rounded-circle"
+                  height="100px"
+                  src="/public/uploads/<%= service.userId.profileImage%>"
+                />
+                <% } else { %>
+                <img
+                  class="rounded-circle"
+                  height="100px"
+                  src="/public/image/default-profile-photo.png"
+                />
+                <% } %></a
+              >
+            </div>
+            <div class="flex-grow-1 ms-3">
+              <a
+                href="/user/<%= service.userId.username%>"
+                class="serviceProfileLink"
+                target="_blank"
+              >
+                <p><%= service.userId.username%></p></a
+              >
+              <% if(isLogin && sUser.username !== service.userId.username) { %>
+              <a
+                href="/messages/<%=sUser.username%>/<%=service.userId.username%>"
+                target="_blank"
+                class="btn btn-clr"
+                >Contact Me <i class="fab fa-facebook-messenger"></i></a
+              >
+              <% } else { %>
+              <a
+                href="#"
+                class="btn btn-clr disabled"
+                >Contact Me <i class="fab fa-facebook-messenger"></i></a
+              >
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 d-lg-block d-none"></div>
+  </div>
+  <% if(feedbacks.length > 0){ %>
+  <div class="row">
+    <div class="col-lg-8 mb-5">
+      <div class="bg-white p-3">
+        <% feedbacks.forEach(sFeedBack => { %>
+        <div class="d-flex my-5">
+          <div class="flex-shrink-0">
+            <% if(sFeedBack.sender.profileImage) { %>
+            <img
+              class="rounded-circle"
+              height="50"
+              width="50"
+              src="/public/uploads/<%=sFeedBack.sender.profileImage%>"
+            />
+            <% } else { %>
+            <img
+              class="rounded-circle"
+              height="50"
+              width="50"
+              src="/public/image/default-profile-photo.png"
+            />
+            <% } %>
+          </div>
+          <div class="ms-3 w-100 px-3" style="background-color: #f5f5f5">
+            <p class="mt-1"><strong><%=sFeedBack.sender.username%></strong></p>
+            <p><%= sFeedBack.feedbacktext %></p>
+            <% for (let ratingIndex = 0; ratingIndex < sFeedBack.rating;
+            ratingIndex++) { %>
+            <i class="fas fa-star mb-3" style="color: #ff9800"></i>
+            <% } %> <% if(sFeedBack.rating < 5) { %> <% for (let ratingIndex =
+            sFeedBack.rating + 1; ratingIndex <= 5; ratingIndex++) { %>
+            <i class="fas fa-star my-2"></i>
+            <% } %> <% } %>
+            <p class="text-muted">Published <%= momentTimeFromNow(sFeedBack.createdAt) %></p>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+    <div class="col-lg-4 d-lg-block d-none"></div>
+  </div>
+  <% } %>
+</div>

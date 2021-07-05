@@ -1,0 +1,28 @@
+<div class="container-fluid text-break text-center">
+  <table class="table table-striped">
+    <thead>
+      <tr class="btn-clr">
+        <th scope="col">Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let productIndex = 0; productIndex < jobPostOrder.deliveryWork.length;
+      productIndex++) { %>
+      <tr>
+        <td class="text-break">
+          <%= jobPostOrder.deliveryWork[productIndex].originalname %>
+        </td>
+        <td>
+          <form
+            action="<%=`/user/${sUser.username}/jobpostorder/${jobPostOrder._id}/download/${jobPostOrder.deliveryWork[productIndex].filename}/${productIndex}`%>"
+            method="GET"
+          >
+            <button type="submit" class="btn btn-clr">Download</button>
+          </form>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>

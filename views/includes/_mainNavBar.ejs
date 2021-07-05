@@ -1,0 +1,154 @@
+<div id="main_nav_div">
+  <!-- FIRST NAV -->
+  <nav class="navbar navbar-expand-lg navbar-light" id="main_top_nav">
+    <div class="container-fluid">
+      <a class="navbar-brand logo-title" href="/">freele</a>
+
+      <form
+        action="/search"
+        method="get"
+        class="w-50 me-auto d-md-block d-none"
+      >
+        <div class="input-group d-none" id="header-search">
+          <input
+            type="search"
+            name="searchItem"
+            class="form-control"
+            placeholder="Search From Here..."
+            required
+          />
+          <button class="btn btn-clr searchBtn" type="search">Search</button>
+        </div>
+      </form>
+
+      <span class="screen-darken"></span>
+      <button data-trigger="navbar_main" class="d-lg-none navbar-toggler">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="navbar_main" class="mobile-offcanvas">
+        <form action="/search" method="get">
+          <div class="offcanvas-header">
+            <a class="navbar-brand logo-title" href="/">freele</a>
+            <button class="btn-close float-end mt-1"></button>
+            <div class="input-group mt-4">
+              <input
+                type="search"
+                class="form-control"
+                name="searchItem"
+                aria-label="Sizing example input"
+                placeholder="Search From Here..."
+                required
+              />
+              <button class="btn btn-clr searchBtn">Search</button>
+            </div>
+          </div>
+        </form>
+
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/allservices">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/alljobpost">Posts</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/allusers">Users</a>
+          </li>          
+          <li class="nav-item dropdown has-megamenu">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              data-bs-toggle="dropdown"
+              onclick="return setCategory();"
+            >
+              Category
+            </a>
+            <div class="dropdown-menu megamenu" role="menu">
+              <div class="row row-cols-auto" id="setCategoryItem">
+                <!-- WORK DONE IN CLIENT JS ===> script.js -->
+              </div>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              data-bs-toggle="dropdown"
+            >
+              <% if (!isLogin || !sUser.profileImage) { %>
+              <img
+                src="/public/image/default-profile-photo.png"
+                class="rounded-circle"
+                height="35"
+              />
+              <% } else { %>
+              <img
+                src="/public/uploads/<%= sUser.profileImage %>"
+                class="rounded-circle"
+                height="35"
+              />
+              <% } %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <% if (!isLogin) { %>
+              <li><a class="dropdown-item" href="/signin"> Signin</a></li>
+              <li><a class="dropdown-item" href="/signup"> Signup </a></li>
+              <% } else { %>
+              <% if (isLoginAdmin) { %>
+                <li>
+                  <a class="dropdown-item" href="/admin/<%=sUser.username%>/dashboard">
+                    Dashboard
+                  </a>
+                </li>               
+              <% } %>                
+              <li>
+                <a class="dropdown-item" href="/user/<%=sUser.username%>">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/user/<%=sUser.username%>/order">
+                  All Orders
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/user/<%=sUser.username%>/create_service"
+                >
+                  Create a New Service
+                </a>
+              </li>              
+              <li>
+                <a
+                  class="dropdown-item"
+                  href="/user/<%=sUser.username%>/post_request"
+                >
+                  Post a New Request
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/user/<%= sUser.username %>/earning_history"
+                  >Earning History</a
+                >
+              </li>              
+              <li>
+                <a class="dropdown-item" href="/messages/<%= sUser.username %>"
+                  >Messages</a
+                >
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="/logout"> Logout </a></li>
+              <% } %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+</div>

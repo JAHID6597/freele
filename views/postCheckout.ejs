@@ -1,0 +1,90 @@
+<!-- Start Header -->
+<%- include('./includes/_header') %>
+<!-- End Header -->
+
+<!-- Start Main Nav Bar -->
+<%- include('./includes/_mainNavBar') %>
+<!-- End Main Nav Bar -->
+
+<!-- Start Post Checkout  -->
+<div style="padding-top: 20vh; padding-bottom: 20vh">
+  <h1 class="pb-5 text-center text-uppercase"><b>Checkout</b></h1>
+
+  <div class="container">
+    <div
+      class="alert alert-danger d-none"
+      role="alert"
+      id="payment-error"
+    ></div>
+    <div class="row">
+      <div class="col-md-8">
+        <%- include('./jobPost/_jobPostOrderDetails') %> 
+      </div>
+      <div class="col-md-4">
+        <div class="m-2 bg-white p-3">
+          <p>
+            <span>SubTotal: </span>
+            <span class="float-end">$<%= request.offerPrice.toFixed(2) %></span>
+          </p>
+          <p>
+            <span>Charge: </span>
+            <span class="float-end"
+              >$<%= (request.offerPrice * (2.5/100)).toFixed(2) %></span
+            >
+          </p>
+          <p class="py-2">
+            <span><b>Total: </b></span>
+            <span class="float-end"
+              >$<%= (parseFloat(parseFloat(request.offerPrice) +
+              parseFloat(request.offerPrice * (2.5/100)))).toFixed(2) %></span
+            >
+          </p>
+          <form
+            class="text-center"
+            action="/user/<%= user.username%>/jobpost/<%= jobPost.id %>/<%= request.id%>/charge"
+            method="POST"
+          >
+            <script
+              src="https://checkout.stripe.com/v3/checkout.js"
+              ,
+              class="stripe-button"
+              ,
+              data-key="<%=keyPublishable%>"
+              ,
+              data-locale="auto"
+              ,
+              data-name="<%= sUser.username %>"
+              ,
+              data-description="<%= sUser.userBio %>"
+              ,
+              data-image="/public/uploads/<%=sUser.profileImage%>"
+              ,
+              data-amount="<%= (parseFloat(parseFloat(request.offerPrice) +
+              parseFloat(request.offerPrice * (2.5/100))).toFixed(2) * 100) %>"
+              ,
+              data-zip-code="true"
+            ></script>
+
+            <script>
+              // Hide Default Stripe Button
+              document.getElementsByClassName(
+                "stripe-button-el"
+              )[0].style.display = "none";
+            </script>
+            <button
+              type="submit"
+              class="btn btn-clr text-white btn-lg mt-3 w-100"
+            >
+              Pay Now
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END Post Checkout  -->
+
+<!-- Start Footer -->
+<%- include('./includes/_footer') %>
+<!-- End Footer -->

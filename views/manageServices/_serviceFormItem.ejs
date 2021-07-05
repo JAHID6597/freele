@@ -1,0 +1,241 @@
+<div class="form-group mb-3">
+  <textarea
+    maxlength="100"
+    class="form-control form-control-lg"
+    id="serviceTitle"
+    name="serviceTitle"
+    rows="2"
+    placeholder="Enter Service Title..."
+    onkeyup="textAreaWordCounter(this, 'serviceTitleTextAreaWordCounter');"
+    required
+  >
+<%= service.serviceTitle %></textarea
+  >
+  <div class="text-end mt-1">
+    <span id="serviceTitleTextAreaWordCounter"
+      ><%= service.serviceTitle ? service.serviceTitle.length : 0 %></span
+    >
+    <span> / 100</span>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-md-6 mb-3">
+    <select
+      class="form-select form-select-lg"
+      id="category"
+      name="category"
+      required
+    >
+      <option value="<%= service.category %>" selected>
+        <% if (service.category) { %> <%= service.category %> <% } else { %>
+        Select a category <% } %>
+      </option>
+    </select>
+  </div>
+  <div class="form-group col-md-6 mb-3">
+    <select
+      class="form-select form-select-lg"
+      id="subCategory"
+      name="subCategory"
+      required
+    >
+      <option value="<%= service.subCategory %>" selected>
+        <% if (service.subCategory) { %> <%= service.subCategory %> <% } else { %>
+        Select a category <% } %>
+      </option>
+    </select>
+  </div>
+</div>
+<div class="form-group mb-3" id="tagDiv">
+  <textarea
+    id="serviceTags"
+    name="serviceTags"
+    class="form-control form-control-lg"
+    rows="2"
+    cols="50"
+    placeholder="Enter Tags..."
+  >
+<%= service.serviceTags %></textarea
+  >
+  <% if (typeof serviceTagsError === 'boolean' && serviceTagsError) { %>
+  <span class="mb-3 alert-message">Tag is not empty</span>
+  <% } %>
+</div>
+<!-- PRICE -->
+<div class="row">
+  <h2 class="text-center my-5 text-uppercase title-border">Pricing</h2>
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="my-0 font-weight-normal">BASIC</h4>
+      </div>
+      <div class="card-body">
+        <input
+          type="number"
+          name="basicPrice"
+          class="form-control mb-3"
+          placeholder="Enter Price"
+          value="<%= service.pricing.price[0] %>"
+          min="0"
+          required
+        />
+        <input
+          type="text"
+          name="basicPackageName"
+          class="form-control mb-3"
+          placeholder="Enter Package Name..."
+          value="<%= service.pricing.packageName[0] %>"
+          required
+        />
+        <input
+          type="number"
+          name="basicDeliveryDay"
+          class="form-control mb-3"
+          placeholder="Delivery time in day..."
+          value="<%= service.pricing.deliveryDay[0] %>"
+          min="0"
+          required
+        />
+        <textarea
+          maxlength="150"
+          rows="3"
+          class="form-control"
+          name="basicPackageDescription"
+          placeholder="Describe the details of your offerring"
+          onkeyup="textAreaWordCounter(this, 'basicPackageDescriptionTextAreaWordCounter');"
+          required
+        >
+<%= service.pricing.description[0] %></textarea
+        >
+        <div class="text-end mt-1">
+          <span id="basicPackageDescriptionTextAreaWordCounter"
+            ><%= service.basicPackageDescription ?
+            service.basicPackageDescription.length : 0 %></span
+          >
+          <span> / 150</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="my-0 font-weight-normal">Standard</h4>
+      </div>
+      <div class="card-body">
+        <input
+          type="number"
+          name="standardPrice"
+          class="form-control mb-3"
+          placeholder="Enter Price"
+          value="<%= service.pricing.price[1] %>"
+          min="0"
+        />
+        <input
+          type="text"
+          name="standardPackageName"
+          class="form-control mb-3"
+          placeholder="Enter Package Name..."
+          value="<%= service.pricing.packageName[1] %>"
+        />
+        <input
+          type="number"
+          name="standardDeliveryDay"
+          class="form-control mb-3"
+          placeholder="Delivery time in day..."
+          value="<%= service.pricing.deliveryDay[1] %>"
+          min="0"
+        />
+        <textarea
+          maxlength="150"
+          rows="3"
+          name="standardPackageDescription"
+          class="form-control"
+          placeholder="Describe the details of your offerring"
+          onkeyup="textAreaWordCounter(this, 'standardPackageDescriptionTextAreaWordCounter');"
+        >
+<%= service.pricing.description[1] %></textarea
+        >
+        <div class="text-end mt-1">
+          <span id="standardPackageDescriptionTextAreaWordCounter"
+            ><%= service.standardPackageDescription ?
+            service.standardPackageDescription.length : 0 %></span
+          >
+          <span> / 150</span>
+        </div>
+      </div>
+    </div>
+    <% if (typeof standardError === 'boolean' && standardError) { %>
+      <span class="mb-3 alert-message">Complete Standard</span>
+    <% } %>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <div class="card-header text-center">
+        <h4 class="my-0 font-weight-normal">PREMIUM</h4>
+      </div>
+      <div class="card-body">
+        <input
+          type="number"
+          name="premiumPrice"
+          autocomplete="off"
+          class="form-control mb-3"
+          placeholder="Enter Price"
+          value="<%= service.pricing.price[2] %>"
+          min="0"
+        />
+        <input
+          type="text"
+          name="premiumPackageName"
+          class="form-control mb-3"
+          placeholder="Enter Package Name..."
+          value="<%= service.pricing.packageName[2] %>"
+        />
+        <input
+          type="number"
+          name="premiumDeliveryDay"
+          class="form-control mb-3"
+          placeholder="Delivery time in day..."
+          value="<%= service.pricing.deliveryDay[2] %>"
+          min="0"
+        />
+        <textarea
+          maxlength="150"
+          rows="3"
+          name="premiumPackageDescription"
+          class="form-control"
+          placeholder="Describe the details of your offerring"
+          onkeyup="textAreaWordCounter(this, 'premiumPackageDescriptionTextAreaWordCounter');"
+        >
+<%= service.pricing.description[2] %></textarea
+        >
+        <div class="text-end mt-1">
+          <span id="premiumPackageDescriptionTextAreaWordCounter"
+            ><%= service.premiumPackageDescription ?
+            service.premiumPackageDescription.length : 0 %></span
+          >
+          <span> / 150</span>
+        </div>
+      </div>
+    </div>
+    <% if (typeof premiumError === 'boolean' && premiumError) { %>
+      <span class="mb-3 alert-message">Complete Premium</span>
+    <% } %>
+  </div>
+</div>
+<div class="form-group mb-3">
+  <h2 class="text-center my-5 text-uppercase title-border">About Service</h2>
+  <textarea
+    class="form-control form-control-lg"
+    id="serviceDescription"
+    name="serviceDescription"
+    placeholder="Brief Description About Your Service..."
+  >
+<%= service.serviceDescription %></textarea
+  >
+  <% if (typeof serviceDescriptionError === 'boolean' &&
+  serviceDescriptionError) { %>
+  <span class="mb-3 alert-message">Service Description is not empty</span>
+  <% } %>
+</div>
+

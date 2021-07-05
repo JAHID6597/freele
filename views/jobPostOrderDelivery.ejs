@@ -1,0 +1,80 @@
+<!-- Start Header -->
+<%- include('./includes/_header') %>
+<!-- End Header -->
+
+<!-- Start Main Nav Bar -->
+<%- include('./includes/_mainNavBar') %>
+<!-- End Main Nav Bar -->
+
+<div id="order-div">
+  <div id="order-create" class="container bg-white pb-3">
+    <%- include('./jobPost/_jobPostOrder') %> <%
+    if(jobPostOrder.deliveryWork.length > 0) { %>
+    <h2 class="text-uppercase text-center my-5">
+      <b>Order Delivered</b>
+    </h2>
+    <%- include('./jobPost/_jobPostOrderProductTable') %>
+     <% } %> <% if (!jobPostOrder.status)
+    { %>
+    <div id="OrderDelivery" class="my-5">
+      <form
+        id="dropFileForm"
+        action="/user/<%= sUser.username %>/jobPostOrder/<%= jobPostOrder.id %>/delivery/done"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input
+          type="file"
+          name="delivery"
+          id="fileInput"
+          multiple
+          onchange="addFiles(event)"
+          required
+        />
+        <label
+          for="fileInput"
+          id="fileLabel"
+          class="py-5"
+          ondragover="overrideDefault(event);fileHover();"
+          ondragenter="overrideDefault(event);fileHover();"
+          ondragleave="overrideDefault(event);fileHoverEnd();"
+          ondrop="overrideDefault(event);fileHoverEnd();
+        addFiles(event);"
+        >
+          <i class="fa fa-file-import fa-5x"></i>
+          <br />
+          <span id="fileLabelText"> Choose a file or drag it here </span>
+          <br />
+          <span id="uploadStatus"></span>
+        </label>
+
+        <button type="submit" class="btn btn-clr btn-lg uploadButton">
+          Deliver Work
+        </button>
+      </form>
+    </div>
+    <% } else {%>
+    <h2 class="text-center text-uppercase mt-5 mb-3 pt-5">
+      <b>Order Completed</b>
+    </h2>
+    <div class="success-checkmark">
+      <div class="check-icon">
+        <span class="icon-line line-tip"></span>
+        <span class="icon-line line-long"></span>
+        <div class="icon-circle"></div>
+        <div class="icon-fix"></div>
+      </div>
+    </div>
+    <div class="my-3 text-center">
+      <h3>Successfully Received Payment</h3>
+      <h3>
+        Earned $<%= request.offerPrice.toFixed(2) %>
+      </h3>
+    </div>
+    <% } %>
+  </div>
+</div>
+
+<!-- Start Footer -->
+<%- include('./includes/_footer') %>
+<!-- End Footer -->

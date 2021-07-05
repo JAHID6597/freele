@@ -1,0 +1,170 @@
+<div id="editProfile" class="container">
+  <div class="row m-0">
+    <div class="col-lg-8 mx-auto">
+      <form
+        class="p-3"
+        id="editProfileForm"
+        action="/user/edit/<%= sUser.username %>?_method=PUT"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <div class="text-center my-5">
+          <label for="setEditProfileImg" id="setEditProfileImgLabel">
+            <% if (!user.profileImage) { %>
+            <img
+              class="rounded-circle"
+              src="../../public/image/default-profile-photo.png"
+              id="editProfileImage"
+              height="100%"
+            />
+            <% } else { %>
+            <img
+              class="rounded-circle"
+              src="/public/uploads/<%= user.profileImage %>"
+              id="editProfileImage"
+              height="100%"
+            />
+            <% } %>
+            <span
+              id="editProfileImgBlackOverlay"
+              class="centered rounded-circle"
+            ></span>
+            <span id="setEditProfileImgSpan" class="centered rounded-circle"
+              >Change Image</span
+            >
+          </label>
+          <input
+            type="file"
+            name="profileImage"
+            class="d-none"
+            onchange="getImage(event, 'editProfileImage')"
+            id="setEditProfileImg"
+            accept="image/*"
+          />
+        </div>
+        <div class="mb-3">
+          <div class="form-floating">
+            <input
+              maxlength="100"
+              type="text"
+              class="form-control"
+              id="userBio"
+              name="userBio"
+              value="<%= user.userBio%>"
+              onkeyup="textAreaWordCounter(this, 'userBioWordCounter');"
+              placeholder="Your Bio"
+            />
+            <label for="userBio"><i class="fas fa-info-circle"></i> Bio</label>
+          </div>
+          <div class="text-end mt-1">
+            <span id="userBioWordCounter"
+              ><%= user.userBio ? user.userBio.length : 0 %></span
+            >
+            <span> / 100</span>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-3">
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="fullName"
+                name="fullname"
+                value="<%= user.fullname%>"
+                placeholder="John Smith"
+              />
+              <label for="fullName"
+                ><i class="fas fa-user"></i> Full Name</label
+              >
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                value="<%= user.username%>"
+                placeholder="johnsmith"
+              />
+              <label for="username"><i class="fas fa-user"></i> Username</label>
+            </div>
+
+            <% if (typeof errors !== 'undefined' && errors.errors) { %> <% for(
+            let index = 0; index < errors.errors.length; index++ ) { %> <% if
+            (errors.errors[index].param === 'username') { %>
+            <span class="mb-3 alert-message">
+              <%= errors.errors[index].msg %>
+            </span>
+            <% break } %> <% } %> <% } %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-floating">
+              <input
+                type="email"
+                class="form-control"
+                name="email"
+                value="<%= user.email%>"
+                id="email"
+                placeholder="name@example.com"
+              />
+              <label for="email"
+                ><i class="fas fa-envelope"></i> Email Address</label
+              >
+            </div>
+          </div>
+
+          <% if (typeof errors !== 'undefined' && errors.errors) { %> <% for(
+          let index = 0; index < errors.errors.length; index++ ) { %> <% if
+          (errors.errors[index].param === 'email') { %>
+          <span class="mb-3 alert-message">
+            <%= errors.errors[index].msg %>
+          </span>
+          <% break } %> <% } %> <% } %>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-floating">
+              <input
+                type="tel"
+                class="form-control"
+                id="phoneNumber"
+                name="phonenumber"
+                value="<%= user.phonenumber%>"
+                placeholder="01234567891"
+              />
+              <label for="phoneNumber"
+                ><i class="fas fa-mobile-alt"></i> Phone Number</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col">
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="address"
+                name="address"
+                value="<%= user.address%>"
+                placeholder="California, Australia"
+              />
+              <label for="address"
+                ><i class="fas fa-map-marker-alt"></i> Address</label
+              >
+            </div>
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-lg w-100 btn-clr">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

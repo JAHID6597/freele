@@ -1,0 +1,49 @@
+<div id="createNewService">
+  <form
+    action="/user/<%=user.username%>/create_service"
+    method="POST"
+    enctype="multipart/form-data"
+  >
+    <h1 class="text-center mb-5 text-uppercase title-border">
+      Upload Service Details
+    </h1>
+
+    <!-- Start Upload Service Form Item -->
+    <%- include('_serviceFormItem') %>
+    <!-- End Upload Service Form Item -->
+
+    <div class="mb-3">
+      <h2 class="text-center my-5 text-uppercase title-border">Thumbnail</h2>
+      <label
+        id="post-thumbnail-label"
+        for="service-thumbnail-image"
+        class="form-label"
+        style="width: 100%; height: auto"
+      >
+        <img
+          id="thumbnail-image"
+          src="/public/uploads/<%= service.thumbnailImage %>"
+          alt=" "
+          width="100%"
+          height="600"
+        />
+        <span id="thumbnail-image-blackOverlay" class="centered"></span>
+        <span id="thumbnail-image-span" class="centered">Change Thumbnail</span>
+      </label>
+
+      <input
+        class="form-control"
+        type="file"
+        id="service-thumbnail-image"
+        name="thumbnailImage"
+        accept="image/*"
+        onchange="getImage(event, 'thumbnail-image');"
+        required
+      />
+    </div>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-lg btn-clr">Create</button>
+    </div>
+  </form>
+</div>

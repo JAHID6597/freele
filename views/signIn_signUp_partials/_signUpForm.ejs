@@ -1,0 +1,91 @@
+<div id="signUp" class="container">
+  <div class="row">
+    <div class="col-lg-6 d-none d-lg-block" id="img-div-signup"></div>
+    <div class="col-lg-6">
+      <form action="/signup" method="post" class="card card-body">
+        <h1 class="text-center sign-title mt-3 mb-3">Signup</h1>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputUsername"
+            name="username"
+            value="<%= user.username %>"
+            autocomplete="off"
+            placeholder="johnSmith"
+          />
+          <label for="floatingInputUsername">
+            <i class="fas fa-user"></i>
+            Username
+          </label>
+        </div>
+
+          <% if (typeof errors !== 'undefined') { %>
+            <% for( let index = 0; index < errors.errors.length; index++ ) { %>
+                  <% if (errors.errors[index].param === 'username') { %>
+                    <span class="mb-3 alert-message">
+                      <%= errors.errors[index].msg  %>
+                    </span>
+                  <% break } %>
+            <% } %>
+          <% } %>
+      
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInputEmail"
+            name="email"
+            value="<%= user.email %>"
+            autocomplete="off"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInputEmail">
+            <i class="fas fa-envelope"></i>
+            Email Address
+          </label>
+        </div>
+          <% if (typeof errors !== 'undefined') { %>
+            <% for( let index = 0; index < errors.errors.length; index++ ) { %>
+                  <% if (errors.errors[index].param === 'email') { %>
+                    <span class="mb-3 alert-message">
+                      <%= errors.errors[index].msg  %>
+                    </span>
+                  <% break } %>
+            <% } %>
+          <% } %>  
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            name="password"
+            value="<%=user.password%>"            
+            autocomplete="off"
+            placeholder="Password"
+          />
+          <label for="floatingPassword">
+            <i class="fas fa-lock"></i>
+            Password
+          </label>
+        </div>
+          <% if (typeof errors !== 'undefined') { %>
+            <% for( let index = 0; index < errors.errors.length; index++ ) { %>
+                  <% if (errors.errors[index].param === 'password') { %>
+                    <span class="mb-3 alert-message">
+                      <%= errors.errors[index].msg  %>
+                    </span>
+                  <% break } %>
+            <% } %>
+          <% } %>   
+        <div>
+          <button type="submit" class="btn btn-lg w-100 sign-btn">Signup</button>
+        </div>
+
+        <p class="mt-5 text-center">
+          Already Have An Account? <a href="/signin">Signin</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<div
+  class="tab-pane fade show active container-fluid mt-3"
+  id="adminSidebarDashboardSection"
+>
+  <div class="row">
+    <div class="col-lg-3 col-md-6 m-auto mb-3 text-center" style="width: 18rem">
+      <div class="card bg-users">
+        <div class="card-body">
+          <p class="fs-1 count" data-target="<%= user.length %>">
+            <strong><%= user.length %></strong>
+          </p>
+          <p class="fs-4">Total Users</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 m-auto mb-3 text-center" style="width: 18rem">
+      <div class="card bg-services">
+        <div class="card-body">
+          <p class="fs-1 count" data-target="<%= service.length %>">
+            <strong><%= service.length %></strong>
+          </p>
+          <p class="fs-4">Total Services</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 m-auto mb-3 text-center" style="width: 18rem">
+      <div class="card bg-jobposts">
+        <div class="card-body">
+          <p class="fs-1 count" data-target="<%= jobPost.length %>">
+            <strong><%= jobPost.length %></strong>
+          </p>
+          <p class="fs-4">Total JobPosts</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6 m-auto mb-3 text-center" style="width: 18rem">
+      <div class="card bg-orders">
+        <div class="card-body">
+          <p
+            class="fs-1 count"
+            data-target="<%= order.length + jobPostOrder.length %>"
+          >
+            <strong><%= order.length + jobPostOrder.length %></strong>
+          </p>
+          <p class="fs-4">Total Orders</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-5 bg-white py-5">
+    <h2 class="text-center text-uppercase mb-3"><strong>Users Earnings</strong></h2>
+    <span class="d-none" id="passUserEarningsService" data-totalearningservice="<%= userEarnings[0].totalEarning_Service %>"></span>
+    <span class="d-none" id="passUserEarningsJobPost" data-totalearningjobpost="<%= userEarnings[0].totalEarning_JobPost %>"></span>
+    <div id="earningPieChart" class="m-auto">
+      <canvas id="usersEarningsPieChart"></canvas>
+    </div>
+  </div>
+</div>

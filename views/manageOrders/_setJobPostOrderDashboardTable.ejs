@@ -1,0 +1,34 @@
+<div class="container-fluid text-break text-center">
+  <% if (!jobPostOrder.length) { %>
+  <h3 class="text-center text-muted my-5">
+    <strong>No Orders Available</strong>
+  </h3>
+  <% } else {%>  
+  <table class="table table-striped">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">OrderID</th>
+        <th scope="col">Status</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for( let orderIndex = 0; orderIndex < jobPostOrder.length; orderIndex++ ) { %>
+      <tr>
+        <th scope="row"><%= orderIndex+1 %></th>
+        <td>
+          <a
+            href="<%=`/user/${sUser.username}/jobPostOrder/${jobPostOrder[orderIndex]._id}/create`%>"
+            target="_blank"
+            ><%=jobPostOrder[orderIndex]._id%></a
+          >
+        </td>
+        <td><span class="btn <%= jobPostOrder[orderIndex].status ? 'btn-success' : 'btn-danger'%>"><%= jobPostOrder[orderIndex].status ? 'Complete' : 'Incomplete' %></span></td>
+        <td>$<%= jobPostOrder[orderIndex].request.offerPrice.toFixed(2) %></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% } %>
+</div>

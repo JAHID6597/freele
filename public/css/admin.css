@@ -1,0 +1,72 @@
+#adminDashBoardSidebar {
+  width: 20%;
+  height: 100%;
+  z-index: 20;
+  position: fixed;
+  top: 0;
+}
+
+#adminDashBoardSidebarMainDiv {
+  height: 100%;
+}
+
+#adminDashboardMobileHeader {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.bg-users {
+  background-color: #6c63ff;
+  color: white;
+}
+
+.bg-services {
+  background-color: rgb(233, 50, 50);
+  color: white;
+}
+
+.bg-jobposts {
+  background-color: rgb(28, 179, 28);
+  color: white;
+}
+
+.bg-orders {
+  background-color: rgb(170, 170, 5);
+  color: white;
+}
+
+#v-pills-tabContent {
+  margin-left: 20%;
+}
+
+#earningPieChart {
+  height: 400px;
+  width: 400px;
+}
+
+.spinnerGrowAdminOrderInProgress{
+  height: .7rem;
+  width: .7rem;
+}
+
+/* Start Media Query */
+@media all and (max-width: 991px) {
+  #adminDashBoardSidebar {
+    width: 80%;
+  }
+  #earningPieChart {
+    height: 250px;
+    width: 250px;
+  }
+  #v-pills-tabContent {
+    margin-left: 0;
+  }
+  .adminSidebarControl {
+    position: absolute;
+    top: 0;
+  }
+}
+
+/* End Media Query */

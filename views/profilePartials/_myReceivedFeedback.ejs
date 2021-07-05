@@ -1,0 +1,177 @@
+<div class="bg-white container-fluid mt-5">
+  <div class="pt-5">
+    <div class="row">
+      <div class="col-md-6 text-lg-start text-md-start text-center">
+        <h3 class="text-uppercase mx-3"><b>FeedBacks</b></h3>
+      </div>
+      <div class="col-md-6 text-lg-end text-md-end text-center">
+        <a href="/user/<%=user.username%>/feedbacks" class="btn btn-clr mx-3"
+          >All My FeedBacks</a
+        >
+      </div>
+    </div>
+
+    <div class="mt-2">
+      <!-- Start All Received FeedBack -->
+      <% if
+      (receiveFeedBacks.length === 0) { %>
+      <h3 class="text-center text-muted py-5">
+        <strong>No FeedBacks Available</strong>
+      </h3>
+      <% } else { %>
+      <div
+        id="carouselExampleControls"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <%if(receiveFeedBacks.length > 0) { %>
+          <div class="carousel-item active">
+            <div class="bg-white p-4 my-5">
+              <div style="background-color: #f5f5f5" class="p-5">
+                <div class="text-center">
+                  <a href="/user/<%=receiveFeedBacks[0].sender.username%>"><% if(receiveFeedBacks[0].sender.profileImage) { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/uploads/<%=receiveFeedBacks[0].sender.profileImage%>"
+                  />
+                  <% } else { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/image/default-profile-photo.png"
+                  />
+                  <% } %></a>
+                  <span><i class="fas fa-long-arrow-alt-right mx-1"></i></span>
+                  <a href="/user/<%=receiveFeedBacks[0].receiver.username%>"><% if(receiveFeedBacks[0].receiver.profileImage) { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/uploads/<%=receiveFeedBacks[0].receiver.profileImage%>"
+                  />
+                  <% } else { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/image/default-profile-photo.png"
+                  />
+                  <% } %></a>
+                  <div class="mt-4">
+                    <p><%= receiveFeedBacks[0].feedbacktext%> </p>
+                    <div>
+                      <% for (let ratingIndex = 0; ratingIndex <
+                      receiveFeedBacks[0].rating;ratingIndex++) { %>
+                      <i class="fas fa-star mb-3" style="color: #ff9800"></i>
+                      <% } %> <% if(receiveFeedBacks[0].rating < 5) { %> <% for
+                      (let ratingIndex = receiveFeedBacks[0].rating + 1;
+                      ratingIndex <= 5; ratingIndex++) { %>
+                      <i class="fas fa-star my-2"></i>
+                      <% } %> <% } %>
+                      <p class="text-muted">
+                        Published <%=
+                        momentTimeFromNow(receiveFeedBacks[0].createdAt) %>
+                      </p>
+                      <a
+                        href="/user/<%= receiveFeedBacks[0].receiver.username%>/service/<%=receiveFeedBacks[0].service.slug%>"
+                        target="_blank"
+                        >Check This Service</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <% for (let index = 1; index < receiveFeedBacks.length; index++) { %>
+          <div class="carousel-item">
+            <div class="bg-white p-4 my-5">
+              <div style="background-color: #f5f5f5" class="p-4">
+                <div class="text-center">
+                  <a href="/user/<%=receiveFeedBacks[index].sender.username%>"><% if(receiveFeedBacks[index].sender.profileImage) { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/uploads/<%=receiveFeedBacks[index].sender.profileImage%>"
+                  />
+                  <% } else { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/image/default-profile-photo.png"
+                  />
+                  <% } %></a>
+                  <span><i class="fas fa-long-arrow-alt-right mx-1"></i></span>
+                  <a href="/user/<%=receiveFeedBacks[index].receiver.username%>"><% if(receiveFeedBacks[index].receiver.profileImage) { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/uploads/<%=receiveFeedBacks[index].receiver.profileImage%>"
+                  />
+                  <% } else { %>
+                  <img
+                    class="rounded-circle"
+                    height="50"
+                    width="50"
+                    src="/public/image/default-profile-photo.png"
+                  />
+                  <% } %></a>
+                  <div class="mt-4">
+                    <p><%= receiveFeedBacks[index].feedbacktext%></p>
+                    <div>
+                      <% for (let ratingIndex = 0; ratingIndex <
+                      receiveFeedBacks[index].rating;ratingIndex++) { %>
+                      <i class="fas fa-star mb-3" style="color: #ff9800"></i>
+                      <% } %> <% if(receiveFeedBacks[index].rating < 5) { %> <%
+                      for (let ratingIndex = receiveFeedBacks[index].rating + 1;
+                      ratingIndex <= 5; ratingIndex++) { %>
+                      <i class="fas fa-star my-2"></i>
+                      <% } %> <% } %>
+                      <p class="text-muted">
+                        Published <%=
+                        momentTimeFromNow(receiveFeedBacks[index].createdAt) %>
+                      </p>
+                      <a
+                        href="/user/<%= receiveFeedBacks[index].receiver.username%>/service/<%=receiveFeedBacks[index].service.slug%>"
+                        target="_blank"
+                        >Check This Service</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } } %>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span><i class="fas fa-arrow-circle-left clr-black fa-2x"></i></span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span><i class="fas fa-arrow-circle-right clr-black fa-2x"></i></span>
+        </button>
+
+        <!-- End All Received FeedBack -->
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>

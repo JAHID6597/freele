@@ -1,0 +1,178 @@
+<div id="userProfile">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-4 pt-lg-0 pt-md-0 pt-5">
+        <div class="profile-card">
+          <div class="profileImg text-center">
+            <% if (user.profileImage) { %>
+            <img
+              class="rounded-circle"
+              src="/public/uploads/<%= user.profileImage %>"
+              id="editProfileImage"
+              height="100%"
+            />
+            <% } else { %>
+            <img
+              class="rounded-circle"
+              src="/public/image//default-profile-photo.png"
+              id="editProfileImage"
+              height="100%"
+            />
+            <% } %>
+          </div>
+          <div class="text-center mt-3">
+            <h4><b><%= user.username%></b></h4>
+            <span><%= user.userBio%></span>
+          </div>
+          <% if (isLogin && sUser.username === user.username) { %>
+          <div class="text-center mt-3 mb-3">
+            <a href="/user/edit/<%= user.username %>"
+              ><button class="btn btn-clr w-50">Edit Profile <i class="fas fa-user-edit"></i></button></a
+            >
+          </div>
+          <% } else { %>
+          <div class="text-center mt-3 mb-3">
+            <% if (isLogin) { %>
+             <a href="/messages/<%=sUser.username%>/<%=user.username%>" target="_blank"
+              ><button class="btn btn-clr w-50">Contact Me <i class="fab fa-facebook-messenger"></i></button></a
+            >
+            <% } else { %>
+              <a href="/signin"
+              ><button class="btn btn-clr w-50">Contact Me <i class="fab fa-facebook-messenger"></i></button></a
+            >
+            <% } %> 
+          </div>
+          <% } %>
+        </div>
+      </div>
+      <div class="col-lg-8 my-lg-0 my-4 profile-pill-tab">
+        <ul class="nav nav-pills nav-justified mb-3" id="pills-tab">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#pills-about"
+              ><b>About</b></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#pills-timeline"
+              ><b>Timeline</b></a
+            >
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+          <!-- About Tab -->
+          <div class="tab-pane fade show active" id="pills-about">
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title"
+                  ><i class="fas fa-user"></i> full name</span
+                >
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"><%= user.fullname%></span>
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title"
+                  ><i class="fas fa-user"></i> username</span
+                >
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"><%= user.username%></span>
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title"
+                  ><i class="fas fa-envelope"></i> email</span
+                >
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"><%= user.email%></span>
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title"
+                  ><i class="fas fa-phone"></i> contact</span
+                >
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value">01234567891</span>
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title"
+                  ><i class="fas fa-map-marker-alt"></i> address</span
+                >
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"><%= user.address%></span>
+              </div>
+            </div>
+          </div>
+          <!-- Timeline Tab -->
+          <div class="tab-pane fade" id="pills-timeline">
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title">Total Earnings</span>
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"
+                  >$<%= user.earnings.totalEarning.toFixed(2) %>
+                </span>
+              </div>
+            </div>            
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title">Total Posts</span>
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"
+                  ><%= jobPost.length %>
+                </span>
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title">Total Services</span>
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"
+                  ><%= service.length %></span
+                >
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title">Total Sent Feedback</span>
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"><%= user.sentFeedBack.length %> </span>
+              </div>
+            </div>
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title">Total Received Feedback</span>
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"><%= user.receiveFeedBack.length %> </span>
+              </div>
+            </div>            
+            <div class="row container-fluid text-break">
+              <div class="col-md-6">
+                <span class="pill-tab-content-title">Member Since</span>
+              </div>
+              <div class="col-md-6">
+                <span class="pill-tab-content-value"
+                  ><%= moment(user.createdAt) %>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

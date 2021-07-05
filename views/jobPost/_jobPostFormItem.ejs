@@ -1,0 +1,115 @@
+<h1 class="text-center mb-5 text-uppercase title-border">
+  What Service Are You Looking For?
+</h1>
+
+<div class="form-group mb-4">
+  <p class="my-1"><b>Service Description</b></p>
+  <textarea
+    maxlength="500"
+    class="form-control form-control-lg"
+    id="postServiceDetailsDescription"
+    name="postServiceDetailsDescription"
+    rows="5"
+    placeholder="Describe the service you're looking to purchase..."
+    onkeyup="textAreaWordCounter(this, 'postServiceDetailsDescriptionTextAreaWordCounter');"
+    required
+  >
+<%= jobPost.postServiceDetailsDescription %></textarea
+  >
+  <div class="text-end mt-1">
+    <span id="postServiceDetailsDescriptionTextAreaWordCounter"
+      ><%= jobPost.postServiceDetailsDescription ?
+      jobPost.postServiceDetailsDescription.length : 0 %></span
+    >
+    <span> / 500</span>
+  </div>
+</div>
+
+<div class="custom-file-container" data-upload-id="myUniqueUploadId">
+  <label
+    ><b>Attach File</b>
+    <a
+      href="javascript:void(0)"
+      class="custom-file-container__image-clear"
+      title="Clear Image"
+    ></a
+  ></label>
+  <label class="custom-file-container__custom-file">
+    <input
+      type="file"
+      class="custom-file-container__custom-file__custom-file-input"
+      accept="*"
+      id="postRequestAttachFiles"
+      name="attachFiles"
+      value="<%= jobPost.attachFiles.originalname %>"
+      required
+      multiple
+      aria-label="Choose File"
+    />
+    <input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+    <span
+      class="custom-file-container__custom-file__custom-file-control"
+    ></span>
+  </label>
+  <div
+    class="custom-file-container__image-preview"
+    id="attachFilepreview"
+  ></div>
+</div>
+
+<div class="row mb-4">
+  <p class="my-2"><b>Select Category for this service</b></p>
+  <div class="form-group col-md-6 mb-3">
+    <select
+      class="form-select form-select-lg"
+      id="category"
+      name="category"
+      required
+    >
+      <option value="<%= jobPost.category %> " selected>
+        <%= jobPost.category ? jobPost.category : 'Select a category' %>
+      </option>
+    </select>
+  </div>
+  <div class="form-group col-md-6 mb-3">
+    <select
+      class="form-select form-select-lg"
+      id="subCategory"
+      name="subCategory"
+      required
+    >
+      <option value="<%= jobPost.subCategory %> " selected>
+        <%= jobPost.subCategory ? jobPost.subCategory : 'Select a sub category'
+        %>
+      </option>
+    </select>
+  </div>
+</div>
+
+<div class="mb-4">
+  <p class="my-2">
+    <b
+      >Once you place your order, when would you like your service delivered?</b
+    >
+  </p>
+  <input
+    type="number"
+    class="form-control"
+    placeholder="How many Days..."
+    name="deliveryDay"
+    value="<%= jobPost.deliveryDay  %>"
+    required
+  />
+</div>
+
+<div class="mb-4">
+  <p class="my-2"><b>What is your budget for this service?</b></p>
+  <input
+    type="number"
+    class="form-control"
+    placeholder="How much Dollars($)..."
+    name="price"
+    value="<%= jobPost.price %>"
+    required
+  />
+</div>

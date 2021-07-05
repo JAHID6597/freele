@@ -1,0 +1,59 @@
+<div class="container-fluid text-break text-center">
+  <% if (!order.length) { %>
+  <h3 class="text-center text-muted my-5">
+    <strong>No Orders Available</strong>
+  </h3>
+  <% } else {%>
+  <table class="table table-striped">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">OrderID</th>
+        <th scope="col">ServiceID</th>
+        <th scope="col">Status</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for( let orderIndex = 0; orderIndex < order.length; orderIndex++ ) { %>
+      <tr>
+        <th scope="row"><%= orderIndex+1 %></th>
+        <td>
+          <a
+            href="<%=`/user/${order[orderIndex].user.username}/order/${order[orderIndex]._id}/create`%>"
+            target="_blank"
+            ><%=order[orderIndex]._id%></a
+          >
+        </td>
+        <td>
+          <a
+            href="<%=`/user/${order[orderIndex].service.userId.username}/service/${order[orderIndex].service.slug}`%>"
+            target="_blank"
+            ><%=order[orderIndex].service._id%></a
+          >
+        </td>
+        <td>
+          <span
+            class="
+              btn
+              <%=
+              order[orderIndex].status
+              ?
+              'btn-success'
+              :
+              'btn-danger'
+              %>
+            "
+            ><%= order[orderIndex].status ? 'Complete' : 'Incomplete' %></span
+          >
+        </td>
+        <td>
+          $<%= order[orderIndex].service.pricing.price[order[orderIndex].index]
+          %>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% } %>
+</div>

@@ -1,0 +1,45 @@
+<div id="earningHistoryDashbord">
+  <div class="container">
+    <div class="row">
+      <div
+        class="col-lg-4 col-md-4 m-auto mb-3 text-center"
+        style="width: 18rem"
+      >
+        <div class="card bg-totalEarning">
+          <div class="card-body">
+            <p class="fs-1">
+              <strong><%= user.earnings.totalEarning %></strong>
+            </p>
+            <p class="fs-4">Total Earning</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-4 col-md-4 m-auto mb-3 text-center"
+        style="width: 18rem"
+      >
+        <div class="card bg-totalEarningService">
+          <div class="card-body">
+            <p class="fs-1">
+              <strong><%= user.earnings.totalEarning_Service %></strong>
+            </p>
+            <p class="fs-4">Total Earning Service</p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="col-lg-4 col-md-4 m-auto mb-3 text-center"
+        style="width: 18rem"
+      >
+        <div class="card bg-totalEarningJobPost">
+          <div class="card-body">
+            <p class="fs-1">
+              <strong><%= user.earnings.totalEarning_JobPost %></strong>
+            </p>
+            <p class="fs-4">Total Earning JobPost</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

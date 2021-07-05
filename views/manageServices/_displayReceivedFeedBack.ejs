@@ -1,0 +1,63 @@
+<% if (receiveFeedBacks.length === 0) { %>
+<h3 class="text-center text-muted my-5">
+  <strong>No FeedBacks Available</strong>
+</h3>
+<% } if(receiveFeedBacks.length > 0){ receiveFeedBacks.forEach(sFeedBack => { %>
+<div class="bg-white p-4 my-5">
+  <div style="background-color: #f5f5f5" class="p-4">
+    <div class="text-center">
+      <a href="/user/<%= sFeedBack.sender.username %>"><% if(sFeedBack.sender.profileImage) { %>
+      <img
+        class="rounded-circle"
+        height="50"
+        width="50"
+        src="/public/uploads/<%=sFeedBack.sender.profileImage%>"
+      />
+      <% } else { %>
+      <img
+        class="rounded-circle"
+        height="50"
+        width="50"
+        src="/public/image/default-profile-photo.png"
+      />
+      <% } %></a>
+      <span><i class="fas fa-long-arrow-alt-right mx-1"></i></span>
+      <a href="/user/<%= sFeedBack.receiver.username %>"><% if(sFeedBack.receiver.profileImage) { %>
+      <img
+        class="rounded-circle"
+        height="50"
+        width="50"
+        src="/public/uploads/<%=sFeedBack.receiver.profileImage%>"
+      />
+      <% } else { %>
+      <img
+        class="rounded-circle"
+        height="50"
+        width="50"
+        src="/public/image/default-profile-photo.png"
+      />
+      <% } %></a>
+      <div class="mt-4">
+        <p><%= sFeedBack.feedbacktext%></p>
+        <div>
+          <% for (let ratingIndex = 0; ratingIndex <
+          sFeedBack.rating;ratingIndex++) { %>
+          <i class="fas fa-star mb-3" style="color: #ff9800"></i>
+          <% } %> <% if(sFeedBack.rating < 5) { %> <% for (let ratingIndex =
+          sFeedBack.rating + 1; ratingIndex <= 5; ratingIndex++) { %>
+          <i class="fas fa-star my-2"></i>
+          <% } %> <% } %>
+          <p class="text-muted">
+            Published <%= momentTimeFromNow(sFeedBack.createdAt) %>
+          </p>
+          <a
+            href="/user/<%= sFeedBack.receiver.username%>/service/<%=sFeedBack.service.slug%>"
+            target="_blank"
+            >Check This Service</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% }) %> <% } %>

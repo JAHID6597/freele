@@ -1,0 +1,65 @@
+<div class="tab-pane fade show" id="adminSidebarUserSection">
+  <div class="container my-5 bg-white" style="overflow-x: auto">
+    <h2 class="py-3"><strong>Recent Users</strong></h2>
+    <table class="table table-striped" id="sidebarUsersTable">
+      <thead>
+        <tr class="btn-clr text-center">
+          <th scope="col">since</th>
+          <th scope="col">Image</th>
+          <th scope="col">fullname</th>
+          <th scope="col">username</th>
+          <th scope="col">services</th>
+          <th scope="col">createServicesOrders</th>
+          <th scope="col">getServicesOrders</th>
+          <th scope="col">jobPosts</th>
+          <th scope="col">createJobPostOrders</th>
+          <th scope="col">getJobPostOrders</th>
+          <th scope="col">totalFeedBackSent</th>
+          <th scope="col">totalFeedBackReceive</th>
+          <th scope="col">totalEarnFromServices($)</th>
+          <th scope="col">totalEarnFromJobPosts($)</th>
+          <th scope="col">totalEarn($)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% user.forEach(singleUser => { %>
+        <tr class="text-center">
+          <th scope="row">
+            <%= momentFormatMonthDayYear(singleUser.createdAt)%>
+          </th>
+          <td>
+            <% if (singleUser.profileImage) { %>
+            <img
+              src="/public/uploads/<%= singleUser.profileImage %>"
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+            <% } else { %>
+            <img
+              src="/public/image/default-profile-photo.png"
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+            <% } %>
+          </td>
+          <td><%= singleUser.fullname %></td>
+          <td><%= singleUser.username%></td>
+          <td><%= singleUser.services.length %></td>
+          <td><%= singleUser.createOrders.length %></td>
+          <td><%= singleUser.getOrders.length %></td>
+          <td><%= singleUser.jobPost.length %></td>
+          <td><%= singleUser.createJobPostOrders.length %></td>
+          <td><%= singleUser.getJobPostOrders.length %></td>
+          <td><%= singleUser.sentFeedBack.length %></td>
+          <td><%= singleUser.receiveFeedBack.length %></td>
+          <td><%= singleUser.earnings.totalEarning_Service %></td>
+          <td><%= singleUser.earnings.totalEarning_JobPost %></td>
+          <td><%= singleUser.earnings.totalEarning %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

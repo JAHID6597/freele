@@ -1,0 +1,136 @@
+<div id="allServices" class="container-fluid bg-white">
+  <div class="row">
+    <div class="pt-lg-0 pt-md-0 pt-5 col-md-6 text-md-start text-center">
+      <a
+        class="btn btn-lg m-1 <%= filter === 'recent' ? 'btn-clr' : 'btn-secondary' %>"
+        href="/allservices?filter=recent"
+        >Recent</a
+      >
+      <a
+        class="btn btn-lg m-1 <%= filter === 'week' ? 'btn-clr' : 'btn-secondary' %>"
+        href="/allservices?filter=week"
+        >Week</a
+      >
+      <a
+        class="btn btn-lg m-1 <%= filter === 'month' ? 'btn-clr' : 'btn-secondary' %>"
+        href="/allservices?filter=month"
+        >Month</a
+      >
+      <a
+        class="btn btn-lg m-1 <%= filter === 'year' ? 'btn-clr' : 'btn-secondary' %>"
+        href="/allservices?filter=year"
+        >Year</a
+      >
+    </div>
+
+    <!-- SORT BY PRICE -->
+    <div class="col-md-6 text-md-end text-center">
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-clr dropdown-toggle"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          SORT BY PRICE
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <% if (errorPrice) { %>
+          <div class="alert text-break alert-danger" role="alert">
+            Maximum Price Must Be greater Than Minimum Price
+          </div>
+          <% } %>
+          <form class="px-4 py-3" action="/allservices" method="GET">
+            <div class="form-group mb-2">
+              <input
+                type="number"
+                name="minimumPrice"
+                min="0"
+                class="form-control"
+                placeholder="Minimum Price"
+                required
+              />
+            </div>
+            <div class="form-group mb-2">
+              <input
+                type="number"
+                min="0"
+                name="maximumPrice"
+                class="form-control"
+                placeholder="Maximum Price"
+                required
+              />
+            </div>
+            <button type="submit" class="btn w-100 btn-clr">Find</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Display Grid All Service -->
+  <%- include('_displayGridService') %>
+  <!-- End Display Grid All Service -->
+
+  <!-- Pagination -->
+  <div id="allServicesPagination" class="container-fluid py-5">
+    <% if (totalPages > 1) { %>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item<%= currentPageNumber === 1 ? ' disabled' : '' %>">
+          <% if (priceFilter) { %>
+           <a
+            class="page-link"
+            href="<%= `/allservices?minimumPrice=${minimumPrice}&maximumPrice=${maximumPrice}&page=${currentPageNumber-1}`%>"
+            >Previous</a
+          >
+          <% } else { %>
+          <a
+            class="page-link"
+            href="<%= `/allservices?filter=${filter}&page=${currentPageNumber-1}`%>"
+            >Previous</a
+          >
+          <% } %>
+        </li>
+        <% for( let index = 1; index <= totalPages; index++ ) { %>
+
+        <li class="page-item">
+          <% if (priceFilter) { %>
+           <a
+            class="page-link <% currentPageNumber === index ? ' active' : '' %>"
+            href="<%= `/allservices?minimumPrice=${minimumPrice}&maximumPrice=${maximumPrice}&page=${index}`%>"
+            ><%= index%></a
+          >
+          <% } else { %>
+          <a
+            class="page-link <% currentPageNumber === index ? ' active' : '' %>"
+            href="<%= `/allservices?filter=${filter}&page=${index}`%>"
+            ><%= index%></a
+          >
+          <% } %>
+        </li>
+        <% } %>
+
+        <li
+          class="page-item<%= currentPageNumber === totalPages ? ' disabled' : '' %>"
+        >
+        <% if (priceFilter) { %>
+           <a
+            class="page-link"
+            href="<%= `/allservices?minimumPrice=${minimumPrice}&maximumPrice=${maximumPrice}&page=${currentPageNumber+1}`%>"
+            >Next</a
+          >
+          <% } else { %>
+          <a
+            class="page-link"
+            href="<%= `/allservices?filter=${filter}&page=${currentPageNumber+1}`%>"
+            >Next</a
+          >
+          <% } %>
+        </li>
+      </ul>
+    </nav>
+    <% } %>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="py-5 px-3">
+  <h3 class="text-break">
+    <b>Order <span class="text-muted">#<%= jobPostOrder.id %></span> </b>
+    <span class="float-end">$<%= (jobPostOrder.request.offerPrice * 1).toFixed(2) %></span>
+  </h3>
+  <% if (jobPostOrder.jobPost.userId.username === sUser.username) { %>   
+    <h3 class="text-center mt-5 text-clr"><a class="text-decoration-none" href="<%=`${jobPostOrder.charge.receipt_url}`%>" target="_blank"><b>Click Me To Check Payment Receipt</b></a></h3>
+  <% } %>
+</div>
+<div class="container-fluid py-5" id="jobPostOrderDetailsCreate">
+  <h3 class="mb-5 text-center"><b>Order Details</b></h3>
+  <%- include ('_jobPostOrderDetails') %> 
+</div>
+<% if (!jobPostOrder.status) { %>
+<div class="countdown d-flex justify-content-center flex-wrap my-5">
+  <span
+    id="pass-end-date"
+    class="d-none"
+    data-passenddate="<%=countDownTimer(jobPostOrder.createdAt, request.offerDeliveryDay)%>"
+  ></span>
+  <div id="cnt-day" class="">
+    <p id="day" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">DAY</p>
+  </div>
+  <div id="cnt-hour" class="">
+    <p id="hour" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">HOUR</p>
+  </div>
+  <div id="cnt-minute" class="">
+    <p id="minute" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">MINUTE</p>
+  </div>
+  <div id="cnt-second" class="">
+    <p id="second" class="p-5 mb-3 bg-light big-text">0</p>
+    <p class="text-center">SECOND</p>
+  </div>
+</div>
+<% } %>

@@ -1,0 +1,33 @@
+<div class="tab-pane fade show" id="adminSidebarServiceOrderSection">
+  <div class="container my-5 bg-white" style="overflow-x: auto">
+    <h2 class="py-3"><strong>Services Orders</strong></h2>
+    <table class="table table-striped" id="sidebarServiceOrdersTable">
+      <thead>
+        <tr class="btn-clr text-center">
+          <th scope="col">Create</th>
+          <th scope="col">OrderId</th>
+          <th scope="col">ServiceId</th>
+          <th scope="col">Buyer</th>
+          <th scope="col">Seller</th>
+          <th scope="col">Price($)</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% order.forEach(singleOrder => { %>
+        <tr class="text-center">
+          <th scope="row">
+            <%= momentFormatMonthDayYear(singleOrder.createdAt)%>
+          </th>
+          <td><%= singleOrder.id %> </td>
+          <td><%= singleOrder.service._id %> </td>
+          <td><%= singleOrder.user %></td>
+          <td><%= singleOrder.service.userId %></td>
+          <td><%= (singleOrder.service.pricing.price[singleOrder.index]).toFixed(2) %></td>
+          <td><span class="btn <%= singleOrder.status ? 'btn-success' : 'btn-danegr' %>"><%= singleOrder.status ? 'complete' : 'incomplete' %></span></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>

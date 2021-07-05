@@ -1,0 +1,62 @@
+<div class="container-fluid text-break text-center">
+  <% if (!getOrder.length) { %>
+  <h3 class="text-center text-muted my-5">
+    <strong>No Orders Available</strong>
+  </h3>
+  <% } else {%>
+  <table class="table table-striped">
+    <thead>
+      <tr class="table-dark">
+        <th scope="col">#</th>
+        <th scope="col">OrderID</th>
+        <th scope="col">ServiceID</th>
+        <th scope="col">Status</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for( let getOrderIndex = 0; getOrderIndex < getOrder.length;
+      getOrderIndex++ ) { %>
+      <tr>
+        <th scope="row"><%= getOrderIndex+1 %></th>
+        <td>
+          <a
+            href="<%=`/user/${sUser.username}/order/${getOrder[getOrderIndex]._id}/delivery`%>"
+            target="_blank"
+            ><%=getOrder[getOrderIndex].id%></a
+          >
+        </td>
+        <td>
+          <a
+            href="<%=`/user/${getOrder[getOrderIndex].service.userId.username}/service/${getOrder[getOrderIndex].service.slug}`%>"
+            target="_blank"
+            ><%=getOrder[getOrderIndex].service._id%></a
+          >
+        </td>
+        <td>
+          <span
+            class="
+              btn
+              <%=
+              getOrder[getOrderIndex].status
+              ?
+              'btn-success'
+              :
+              'btn-danger'
+              %>
+            "
+            ><%= getOrder[getOrderIndex].status ? 'Complete' : 'Incomplete'
+            %></span
+          >
+        </td>
+        <td>
+          $<%=
+          (getOrder[getOrderIndex].service.pricing.price[getOrder[getOrderIndex].index]
+          * 1).toFixed(2) %>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+  <% } %>
+</div>

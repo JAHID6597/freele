@@ -1,0 +1,142 @@
+<div id="adminDashBoardSidebarMainDiv">
+  <div
+    class="p-3 text-white bg-dark d-lg-block d-none"
+    id="adminDashBoardSidebar"
+  >
+    <a
+      href="/"
+      class="
+        align-items-center
+        mb-3 mb-md-0
+        me-md-auto
+        text-white text-decoration-none
+      "
+    >
+      <span class="fs-5"><b>freele</b></span>
+    </a>
+    <span class="float-end d-lg-none pointer-event"
+      ><i class="fas fa-times"></i
+    ></span>
+    <hr />
+    <ul class="nav nav-pills flex-column mb-auto" id="pills-tab">
+      <li class="nav-item">
+        <a
+          href="#adminSidebarDashboardSection"
+          class="nav-link active text-white"
+          data-toggle="pill"
+          >Dashboard</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="#adminSidebarUserSection"
+          class="nav-link text-white"
+          data-toggle="pill"
+          >Users</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          href="#adminSidebarServicesSection"
+          class="nav-link text-white"
+          data-toggle="pill"
+          >Services
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="#adminSidebarJobPostsSection"
+          class="nav-link text-white"
+          data-toggle="pill"
+        >
+          JobPosts
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="#adminSidebarServiceOrderSection"
+          class="nav-link text-white"
+          data-toggle="pill"
+        >
+          ServicesOrders
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          href="#adminSidebarJobPostOrderSection"
+          class="nav-link text-white"
+          data-toggle="pill"
+        >
+          JobPostsOrders
+        </a>
+      </li>
+    </ul>
+    <hr />
+    <div class="pb-3 dropdown">
+      <a
+        href="/user/<%= sUser.username %>"
+        target="_blank"
+        class="
+          d-flex
+          align-items-center
+          text-white text-decoration-none
+          dropdown-toggle
+        "
+        id="dropdownAdminDashboardSidebar"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <% if (sUser.profileImage) { %>
+        <img
+          src="/public/uploads/<%= sUser.profileImage %>"
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+        <% } else { %>
+        <img
+          src="/public/image/default-profile-photo.png"
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+        <% } %>
+        <strong><%= sUser.username %> </strong>
+      </a>
+      <ul
+        class="dropdown-menu dropdown-menu-dark text-small shadow"
+        aria-labelledby="dropdownAdminDashboardSidebar"
+      >
+        <li><a class="dropdown-item" href="/user/<%= sUser.username %>" target="_blank">Profile</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tab-content p-2" id="v-pills-tabContent">
+    <!-- Start Sidebar Dashboard Section -->
+    <%- include('_sidebarDashboard') %>
+    <!-- End Sidebar Dashboard Section -->
+
+    <!-- Start Sidebar User Section -->
+    <%- include('_sidebarUser') %>
+    <!-- End Sidebar User Section -->
+
+    <!-- Start Sidebar Services Section -->
+    <%- include('_sidebarServices') %>
+    <!-- End Sidebar Services Section -->
+
+    <!-- Start Sidebar JobPosts Section -->
+    <%- include('_sidebarJobPosts') %>
+    <!-- End Sidebar JobPosts Section -->
+
+    <!-- Start Sidebar Services Orders Section -->
+    <%- include('_sidebarServicesOrder') %>
+    <!-- End Sidebar Services Orders Section -->
+
+    <!-- Start Sidebar Job Post Orders Section -->
+    <%- include('_sidebarJobPostOrders') %>
+    <!-- End Sidebar Job Post Orders Section -->
+  </div>
+</div>
