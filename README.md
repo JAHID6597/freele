@@ -1,4 +1,5 @@
 # freele
  Online Marketplace For Freelance Services.
 
-### `npm devStart`
+### `npm run devStart`
+http://localhost:3000/
