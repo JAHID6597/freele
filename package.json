@@ -37,5 +37,8 @@
     "socket.io": "^4.0.1",
     "stripe": "^8.145.0",
     "unique-slug": "^2.0.2"
+  },
+  "engines": {
+    "node": "14.17.6"
   }
 }
