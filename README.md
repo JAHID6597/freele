@@ -16,7 +16,6 @@
 
 ## Run command
 ### `npm install`
-### `npm install --save-dev nodemon`
 ### `npm run devStart`
 ### `npm start`
 
