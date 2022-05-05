@@ -138,7 +138,7 @@ const categoryObj = {
 };
 
 for (const key in categoryObj) {
-  let html = `<option onclick="categoryOption(this);">${key}</option>`;
+  let html = `<option>${key}</option>`;
   category.innerHTML += html;
 
   let categoryListHtml = `<li><a href="search?searchItem=${key}">${key}</a></li>`;
@@ -147,7 +147,7 @@ for (const key in categoryObj) {
 
 function categoryOption(id) {
   subCategory.innerHTML = '<option selected>Select a sub category</option>';
-  categoryObj[id.innerHTML].forEach((ele) => {
+  categoryObj[category.value].forEach((ele) => {
     let html = `<option>${ele}</option>`;
     subCategory.innerHTML += html;
   });
