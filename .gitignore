@@ -1,4 +1,5 @@
 config.env
 node_modules
 username_pass.txt
-snapshots/
+snapshots
+Project Report.pdf
