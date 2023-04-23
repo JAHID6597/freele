@@ -21,7 +21,7 @@
 
 <br>
 
-Live --> https://freele-online-marketplace.herokuapp.com
+Live --> https://freele.onrender.com
 
 Local --> http://localhost:3000
 
