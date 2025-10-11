@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const bodyparser = require('body-parser');
 const path = require('path');
 const morgan = require('morgan');
+const cron = require('node-cron');
 const router = require('./routes/router');
 const express = require('express');
 const app = express();
@@ -171,3 +172,7 @@ app.use('/', router);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Listen On PORT ${PORT}`));
+
+cron.schedule('*/5 * * * *', () => {
+  console.log(`[${new Date().toISOString()}] I'm alive`);
+});
